@@ -446,7 +446,7 @@ function DrugCard({ drug, onClick }) {
   );
 }
 
-function Tooltip({ text, children }) {
+function PropTooltip({ text, children }) {
   const [show, setShow] = useState(false);
   return (
     <span style={{position:"relative",display:"inline-flex",alignItems:"center",gap:3}}>
@@ -497,7 +497,7 @@ function Prop({ label, value }) {
     <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",
       padding:"5px 0",borderBottom:`1px solid ${C.bdr}`,fontSize:12}}>
       <span style={{color:C.mut,fontWeight:500}}>
-        {tip ? <Tooltip text={tip}>{label}</Tooltip> : label}
+        {tip ? <PropTooltip text={tip}>{label}</PropTooltip> : label}
       </span>
       <span style={{color:C.txt,fontFamily:"monospace",fontWeight:600}}>{value}</span>
     </div>
@@ -625,9 +625,356 @@ function Modal({ drug, onClose }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// DASHBOARD ANALYTICS
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Recharts is available in the React artifact environment
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+         ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from "recharts";
+
+const ALL_DRUGS = YEARS.flatMap(y => DB[y] || []);
+
+// Palette for charts
+const CHART_COLORS = {
+  sm:   C.sm,
+  bio:  C.bio,
+  fic:  C.fic,
+  bt:   C.bt,
+  od:   C.orp,
+  pr:   C.acc,
+  comp: C.ok,
+  viol: "#e5b8b8",
+};
+const PIE_COLORS = ["#0066cc","#00875a","#7b2fa0","#b35c00","#c0392b",
+                    "#2980b9","#16a085","#8e44ad","#e67e22","#e74c3c",
+                    "#1abc9c","#3498db","#9b59b6"];
+
+const ChartTooltip = ({ active, payload, label }) => {
+  if (!active || !payload?.length) return null;
+  return (
+    <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:8,
+      padding:"10px 14px",boxShadow:C.shadow,fontSize:12}}>
+      <div style={{fontWeight:700,color:C.txt,marginBottom:6}}>{label}</div>
+      {payload.map((p,i) => (
+        <div key={i} style={{color:p.color,marginBottom:2}}>
+          {p.name}: <strong>{p.value}</strong>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+function SectionTitle({ children }) {
+  return (
+    <div style={{fontSize:15,fontWeight:700,color:C.txt,marginBottom:16,
+      paddingBottom:8,borderBottom:`1px solid ${C.bdr}`}}>
+      {children}
+    </div>
+  );
+}
+
+function StatCard({ label, value, sub, color }) {
+  return (
+    <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,
+      padding:"18px 20px",boxShadow:C.shadow,flex:1,minWidth:140}}>
+      <div style={{fontSize:32,fontWeight:800,color:color||C.acc,
+        fontFamily:"Georgia,serif",lineHeight:1}}>{value}</div>
+      <div style={{fontSize:13,fontWeight:600,color:C.txt,marginTop:6}}>{label}</div>
+      {sub && <div style={{fontSize:11,color:C.mut,marginTop:2}}>{sub}</div>}
+    </div>
+  );
+}
+
+function computeYearData(drugs) {
+  const smWithMW = drugs.filter(d => d.pc?.mw);
+
+  // Approvals by year (for all-years view)
+  const byYear = YEARS.map(y => {
+    const yd = DB[y]||[];
+    return { year:String(y),
+      "Small Molecule": yd.filter(d=>d.type==="small_molecule").length,
+      "Biologic":       yd.filter(d=>d.type==="biologic").length,
+      total: yd.length };
+  }).reverse();
+
+  // Designations by year (for all-years view)
+  const desByYear = YEARS.map(y => {
+    const yd = DB[y]||[];
+    return { year:String(y),
+      "First-in-Class": yd.filter(d=>d.desig?.includes("FIC")).length,
+      "Breakthrough":   yd.filter(d=>d.desig?.includes("BT")).length,
+      "Orphan Drug":    yd.filter(d=>d.desig?.includes("OD")).length,
+      "Priority Review":yd.filter(d=>d.desig?.includes("PR")).length };
+  }).reverse();
+
+  // Top sponsors
+  const sponsorCount = {};
+  drugs.forEach(d=>{ if(d.sponsor) sponsorCount[d.sponsor]=(sponsorCount[d.sponsor]||0)+1; });
+  const topSponsors = Object.entries(sponsorCount).sort((a,b)=>b[1]-a[1]).slice(0,12)
+    .map(([name,count])=>({name,count}));
+
+  // ATC distribution
+  const atcGroups = {A:"Alimentary",B:"Blood",C:"Cardiovascular",D:"Dermatology",
+    G:"Genito-urinary",H:"Hormones",J:"Anti-infectives",L:"Antineoplastic",
+    M:"Musculoskeletal",N:"Nervous System",R:"Respiratory",S:"Sensory Organs",V:"Various"};
+  const atcCount = {};
+  drugs.forEach(d=>{ if(!d.atc) return; const l=atcGroups[d.atc[0].toUpperCase()]||"Other"; atcCount[l]=(atcCount[l]||0)+1; });
+  const atcData = Object.entries(atcCount).sort((a,b)=>b[1]-a[1]).map(([name,value])=>({name,value}));
+
+  // MW distribution
+  const mwBuckets=[{range:"<200",min:0,max:200},{range:"200-300",min:200,max:300},
+    {range:"300-400",min:300,max:400},{range:"400-500",min:400,max:500},
+    {range:"500-600",min:500,max:600},{range:"600-800",min:600,max:800},{range:">800",min:800,max:99999}];
+  const mwDist = mwBuckets.map(b=>({range:b.range,
+    count:smWithMW.filter(d=>d.pc.mw>=b.min&&d.pc.mw<b.max).length}));
+
+  // Route distribution
+  const routeCount={};
+  drugs.forEach(d=>{ const r=d.route||"Unknown"; routeCount[r]=(routeCount[r]||0)+1; });
+  const routeData = Object.entries(routeCount).sort((a,b)=>b[1]-a[1])
+    .map(([name,value])=>({name:ROUTE_LABEL[name]||name,value}));
+
+  // Ro5 compliance by year
+  const ro5ByYear = YEARS.map(y=>{
+    const sms=(DB[y]||[]).filter(d=>d.type==="small_molecule"&&d.pc?.mw);
+    const compliant=sms.filter(d=>d.pc.mw<=500&&d.pc.logp<=5&&d.pc.hbd<=5&&d.pc.hba<=10).length;
+    return {year:String(y),"Compliant":compliant,"Violation":sms.length-compliant,
+      pct:sms.length?Math.round(compliant/sms.length*100):0};
+  }).reverse();
+
+  // Designations pie (for single-year view)
+  const desPie=[
+    {name:"First-in-Class",value:drugs.filter(d=>d.desig?.includes("FIC")).length,color:C.fic},
+    {name:"Breakthrough",  value:drugs.filter(d=>d.desig?.includes("BT")).length, color:C.bt},
+    {name:"Orphan Drug",   value:drugs.filter(d=>d.desig?.includes("OD")).length, color:C.orp},
+    {name:"Priority Review",value:drugs.filter(d=>d.desig?.includes("PR")).length,color:C.acc},
+  ].filter(d=>d.value>0);
+
+  return {byYear,desByYear,topSponsors,atcData,mwDist,routeData,ro5ByYear,desPie};
+}
+
+function Dashboard() {
+  const [selYear, setSelYear] = useState("all");
+  const isAll = selYear==="all";
+  const drugs = isAll ? ALL_DRUGS : (DB[parseInt(selYear)]||[]);
+  const D     = computeYearData(drugs);
+
+  const total    = drugs.length;
+  const totalSM  = drugs.filter(d=>d.type==="small_molecule").length;
+  const totalBio = drugs.filter(d=>d.type==="biologic").length;
+  const totalFIC = drugs.filter(d=>d.desig?.includes("FIC")).length;
+  const totalBT  = drugs.filter(d=>d.desig?.includes("BT")).length;
+  const totalOD  = drugs.filter(d=>d.desig?.includes("OD")).length;
+
+  return (
+    <div style={{padding:"24px",maxWidth:1200,margin:"0 auto"}}>
+
+      {/* Year selector */}
+      <div style={{display:"flex",gap:6,marginBottom:24,flexWrap:"wrap",alignItems:"center"}}>
+        <span style={{fontSize:12,color:C.mut,fontWeight:600,marginRight:4}}>View:</span>
+        {["all",...YEARS.map(String)].map(y=>{
+          const act=selYear===y;
+          return (
+            <button key={y} onClick={()=>setSelYear(y)} style={{
+              background:act?C.acc:C.surf,border:`1px solid ${act?C.acc:C.bdr}`,
+              color:act?"#fff":C.mut,borderRadius:6,padding:"5px 14px",
+              fontSize:12,fontWeight:act?700:400,cursor:"pointer",
+              fontFamily:"inherit",transition:"all 0.12s",
+              boxShadow:act?`0 2px 8px ${C.acc}44`:C.shadow}}>
+              {y==="all"?"All Years":y}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Stat cards */}
+      <div style={{display:"flex",gap:12,flexWrap:"wrap",marginBottom:28}}>
+        <StatCard label="Total Approvals"  value={total}    sub={isAll?"2022-2026":selYear}           color={C.acc}/>
+        <StatCard label="Small Molecules"  value={totalSM}  sub={`${total?Math.round(totalSM/total*100):0}% of total`}  color={C.sm}/>
+        <StatCard label="Biologics"        value={totalBio} sub={`${total?Math.round(totalBio/total*100):0}% of total`} color={C.bio}/>
+        <StatCard label="First-in-Class"   value={totalFIC} sub={`${total?Math.round(totalFIC/total*100):0}% of total`} color={C.fic}/>
+        <StatCard label="Breakthrough"     value={totalBT}  sub={`${total?Math.round(totalBT/total*100):0}% of total`}  color={C.bt}/>
+        <StatCard label="Orphan Drug"      value={totalOD}  sub={`${total?Math.round(totalOD/total*100):0}% of total`}  color={C.orp}/>
+      </div>
+
+      {/* Row 1 */}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20,marginBottom:24}}>
+        {/* Approvals by year OR designations pie for single year */}
+        <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
+          {isAll ? (
+            <>
+              <SectionTitle>Approvals by Year</SectionTitle>
+              <ResponsiveContainer width="100%" height={220}>
+                <BarChart data={D.byYear} barCategoryGap="30%">
+                  <CartesianGrid strokeDasharray="3 3" stroke={C.bdr}/>
+                  <XAxis dataKey="year" tick={{fontSize:12,fill:C.mut}} axisLine={false} tickLine={false}/>
+                  <YAxis tick={{fontSize:11,fill:C.mut}} axisLine={false} tickLine={false}/>
+                  <Tooltip content={<ChartTooltip/>}/>
+                  <Legend wrapperStyle={{fontSize:11}}/>
+                  <Bar dataKey="Small Molecule" fill={C.sm}  radius={[4,4,0,0]}/>
+                  <Bar dataKey="Biologic"       fill={C.bio} radius={[4,4,0,0]}/>
+                </BarChart>
+              </ResponsiveContainer>
+            </>
+          ) : (
+            <>
+              <SectionTitle>Drug Type Split — {selYear}</SectionTitle>
+              <ResponsiveContainer width="100%" height={220}>
+                <PieChart>
+                  <Pie data={[
+                    {name:"Small Molecule",value:totalSM,color:C.sm},
+                    {name:"Biologic",value:totalBio,color:C.bio},
+                  ]} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={90}
+                    label={({name,value})=>`${name}: ${value}`}>
+                    {[C.sm,C.bio].map((col,i)=><Cell key={i} fill={col}/>)}
+                  </Pie>
+                  <Tooltip contentStyle={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:8,fontSize:12}}/>
+                </PieChart>
+              </ResponsiveContainer>
+            </>
+          )}
+        </div>
+
+        {/* Designations by year OR pie for single year */}
+        <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
+          {isAll ? (
+            <>
+              <SectionTitle>Regulatory Designations by Year</SectionTitle>
+              <ResponsiveContainer width="100%" height={220}>
+                <BarChart data={D.desByYear} barCategoryGap="30%">
+                  <CartesianGrid strokeDasharray="3 3" stroke={C.bdr}/>
+                  <XAxis dataKey="year" tick={{fontSize:12,fill:C.mut}} axisLine={false} tickLine={false}/>
+                  <YAxis tick={{fontSize:11,fill:C.mut}} axisLine={false} tickLine={false}/>
+                  <Tooltip content={<ChartTooltip/>}/>
+                  <Legend wrapperStyle={{fontSize:11}}/>
+                  <Bar dataKey="Breakthrough"    fill={C.bt}  radius={[3,3,0,0]}/>
+                  <Bar dataKey="Orphan Drug"     fill={C.orp} radius={[3,3,0,0]}/>
+                  <Bar dataKey="Priority Review" fill={C.acc} radius={[3,3,0,0]}/>
+                  <Bar dataKey="First-in-Class"  fill={C.fic} radius={[3,3,0,0]}/>
+                </BarChart>
+              </ResponsiveContainer>
+            </>
+          ) : (
+            <>
+              <SectionTitle>Regulatory Designations — {selYear}</SectionTitle>
+              <ResponsiveContainer width="100%" height={220}>
+                <PieChart>
+                  <Pie data={D.desPie} dataKey="value" nameKey="name"
+                    cx="50%" cy="50%" outerRadius={90}
+                    label={({name,value})=>`${name}: ${value}`}>
+                    {D.desPie.map((d,i)=><Cell key={i} fill={d.color}/>)}
+                  </Pie>
+                  <Tooltip contentStyle={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:8,fontSize:12}}/>
+                </PieChart>
+              </ResponsiveContainer>
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* Row 2: Top sponsors + ATC */}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20,marginBottom:24}}>
+        <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
+          <SectionTitle>Top Sponsors{isAll?" (2022-2026)":" — "+selYear}</SectionTitle>
+          <ResponsiveContainer width="100%" height={280}>
+            <BarChart data={D.topSponsors} layout="vertical" barCategoryGap="20%">
+              <CartesianGrid strokeDasharray="3 3" stroke={C.bdr} horizontal={false}/>
+              <XAxis type="number" tick={{fontSize:11,fill:C.mut}} axisLine={false} tickLine={false}/>
+              <YAxis type="category" dataKey="name" width={130} tick={{fontSize:10,fill:C.mut}} axisLine={false} tickLine={false}/>
+              <Tooltip content={<ChartTooltip/>}/>
+              <Bar dataKey="count" fill={C.acc} radius={[0,4,4,0]} name="Approvals"/>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
+          <SectionTitle>Therapeutic Areas (ATC){isAll?" (2022-2026)":" — "+selYear}</SectionTitle>
+          <ResponsiveContainer width="100%" height={280}>
+            <PieChart>
+              <Pie data={D.atcData} dataKey="value" nameKey="name"
+                cx="50%" cy="50%" outerRadius={100}
+                label={({name,percent})=>`${name} ${(percent*100).toFixed(0)}%`}
+                labelLine={false} style={{fontSize:9}}>
+                {D.atcData.map((_,i)=><Cell key={i} fill={PIE_COLORS[i%PIE_COLORS.length]}/>)}
+              </Pie>
+              <Tooltip contentStyle={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:8,fontSize:12}}/>
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      {/* Row 3: MW + Ro5 */}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20,marginBottom:24}}>
+        <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
+          <SectionTitle>Molecular Weight Distribution{isAll?"":" — "+selYear}</SectionTitle>
+          <ResponsiveContainer width="100%" height={200}>
+            <BarChart data={D.mwDist} barCategoryGap="20%">
+              <CartesianGrid strokeDasharray="3 3" stroke={C.bdr}/>
+              <XAxis dataKey="range" tick={{fontSize:10,fill:C.mut}} axisLine={false} tickLine={false}/>
+              <YAxis tick={{fontSize:11,fill:C.mut}} axisLine={false} tickLine={false}/>
+              <Tooltip content={<ChartTooltip/>}/>
+              <Bar dataKey="count" fill={C.sm} radius={[4,4,0,0]} name="Molecules"/>
+            </BarChart>
+          </ResponsiveContainer>
+          <div style={{fontSize:11,color:C.mut,marginTop:8,textAlign:"center"}}>Lipinski MW threshold: 500 Da</div>
+        </div>
+
+        <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
+          <SectionTitle>Lipinski Ro5 Compliance{isAll?" by Year":" — "+selYear}</SectionTitle>
+          <ResponsiveContainer width="100%" height={200}>
+            {isAll ? (
+              <BarChart data={D.ro5ByYear} barCategoryGap="30%">
+                <CartesianGrid strokeDasharray="3 3" stroke={C.bdr}/>
+                <XAxis dataKey="year" tick={{fontSize:12,fill:C.mut}} axisLine={false} tickLine={false}/>
+                <YAxis tick={{fontSize:11,fill:C.mut}} axisLine={false} tickLine={false}/>
+                <Tooltip content={<ChartTooltip/>}/>
+                <Legend wrapperStyle={{fontSize:11}}/>
+                <Bar dataKey="Compliant" stackId="a" fill={C.ok}             radius={[0,0,0,0]}/>
+                <Bar dataKey="Violation" stackId="a" fill={CHART_COLORS.viol} radius={[4,4,0,0]}/>
+              </BarChart>
+            ) : (
+              <PieChart>
+                <Pie data={[
+                  {name:"Compliant",value:D.ro5ByYear.find(r=>r.year===selYear)?.Compliant||0,color:C.ok},
+                  {name:"Violation",value:D.ro5ByYear.find(r=>r.year===selYear)?.Violation||0,color:CHART_COLORS.viol},
+                ].filter(d=>d.value>0)} dataKey="value" nameKey="name"
+                  cx="50%" cy="50%" outerRadius={80}
+                  label={({name,value,percent})=>`${name}: ${value} (${(percent*100).toFixed(0)}%)`}>
+                  {[C.ok,CHART_COLORS.viol].map((col,i)=><Cell key={i} fill={col}/>)}
+                </Pie>
+                <Tooltip contentStyle={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:8,fontSize:12}}/>
+              </PieChart>
+            )}
+          </ResponsiveContainer>
+          <div style={{fontSize:11,color:C.mut,marginTop:8,textAlign:"center"}}>Small molecules with available data only</div>
+        </div>
+      </div>
+
+      {/* Row 4: Route */}
+      <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,
+        padding:"20px",boxShadow:C.shadow,marginBottom:24}}>
+        <SectionTitle>Route of Administration{isAll?" (2022-2026)":" — "+selYear}</SectionTitle>
+        <ResponsiveContainer width="100%" height={180}>
+          <BarChart data={D.routeData} barCategoryGap="30%">
+            <CartesianGrid strokeDasharray="3 3" stroke={C.bdr}/>
+            <XAxis dataKey="name" tick={{fontSize:11,fill:C.mut}} axisLine={false} tickLine={false}/>
+            <YAxis tick={{fontSize:11,fill:C.mut}} axisLine={false} tickLine={false}/>
+            <Tooltip content={<ChartTooltip/>}/>
+            <Bar dataKey="value" fill={C.orp} radius={[4,4,0,0]} name="Approvals"/>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+    </div>
+  );
+}
+
+
+// ─────────────────────────────────────────────────────────────────────────────
 // MAIN APP
 // ─────────────────────────────────────────────────────────────────────────────
 export default function FDAExplorer() {
+  const [page,   setPage]   = useState("approvals"); // "approvals" | "dashboard"
   const [year,   setYear]   = useState(2026);
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
@@ -680,78 +1027,104 @@ export default function FDAExplorer() {
             Novel NMEs &amp; Biologics · CDER · 2022–2026
           </div>
         </div>
-        <input placeholder="Search name, MOA, sponsor, indication…"
-          value={search} onChange={e=>setSearch(e.target.value)}
-          style={{background:C.bg,border:`1px solid ${C.bdr}`,borderRadius:8,
-            padding:"7px 12px",color:C.txt,fontSize:12,fontFamily:"inherit",
-            width:230,outline:"none",boxShadow:"inset 0 1px 3px #0f162308"}}/>
+        {page==="approvals" && (
+          <input placeholder="Search name, MOA, sponsor, indication…"
+            value={search} onChange={e=>setSearch(e.target.value)}
+            style={{background:C.bg,border:`1px solid ${C.bdr}`,borderRadius:8,
+              padding:"7px 12px",color:C.txt,fontSize:12,fontFamily:"inherit",
+              width:230,outline:"none",boxShadow:"inset 0 1px 3px #0f162308"}}/>
+        )}
       </header>
 
-      {/* Year tabs */}
-      <div style={{background:C.surf,display:"flex",borderBottom:`1px solid ${C.bdr}`,
-        padding:"0 24px",overflowX:"auto",gap:0}}>
-        {YEARS.map(y=>{
-          const act=y===year;
-          const cnt=(DB[y]||[]).length;
+      {/* Top navigation: Approvals | Dashboard */}
+      <div style={{background:C.surf,borderBottom:`1px solid ${C.bdr}`,
+        padding:"0 24px",display:"flex",gap:0}}>
+        {[["approvals","Approvals"],["dashboard","Dashboard"]].map(([key,label])=>{
+          const act = page===key;
           return (
-            <button key={y} onClick={()=>{setYear(y);setFilter("all");setSearch("");}} style={{
+            <button key={key} onClick={()=>setPage(key)} style={{
               background:"none",border:"none",
               borderBottom:act?`2px solid ${C.acc}`:"2px solid transparent",
-              padding:"13px 18px",cursor:"pointer",
-              color:act?C.acc:C.mut,fontSize:13,fontWeight:act?700:400,
-              fontFamily:"inherit",display:"flex",alignItems:"center",gap:7,whiteSpace:"nowrap"}}>
-              {y}
-              <span style={{background:act?C.accBg:C.surfAlt,
-                color:act?C.acc:C.dim,
-                borderRadius:10,padding:"1px 7px",fontSize:10,fontWeight:600}}>{cnt}</span>
+              padding:"13px 20px",cursor:"pointer",
+              color:act?C.acc:C.mut,fontSize:13,fontWeight:act?700:500,
+              fontFamily:"inherit",letterSpacing:"0.01em",transition:"color 0.12s"}}>
+              {label}
             </button>
           );
         })}
       </div>
 
-      {/* Filters */}
-      <div style={{background:C.surf,padding:"10px 24px",display:"flex",gap:6,
-        flexWrap:"wrap",borderBottom:`1px solid ${C.bdr}`,alignItems:"center"}}>
-        {[
-          ["all",          `All (${drugs.length})`],
-          ["small_molecule",`Small Mol. (${smN})`],
-          ["biologic",     `Biologic (${bioN})`],
-          ["fic",          "First-in-Class"],
-          ["bt",           "Breakthrough"],
-          ["od",           "Orphan Drug"],
-        ].map(([k,l])=>(
-          <button key={k} onClick={()=>setFilter(k)} style={{
-            background:filter===k?C.acc:C.bg,
-            border:`1px solid ${filter===k?C.acc:C.bdr}`,
-            color:filter===k?"#fff":C.mut,
-            borderRadius:6,padding:"4px 12px",fontSize:11,
-            fontWeight:filter===k?600:400,
-            cursor:"pointer",fontFamily:"inherit",transition:"all 0.12s"}}>
-            {l}
-          </button>
-        ))}
-        {search && (
-          <span style={{fontSize:11,color:C.mut,marginLeft:4}}>
-            {visible.length} result{visible.length!==1?"s":""}
-          </span>
-        )}
-      </div>
+      {/* Approvals view */}
+      {page==="approvals" && <>
+        {/* Year tabs */}
+        <div style={{background:C.surf,display:"flex",borderBottom:`1px solid ${C.bdr}`,
+          padding:"0 24px",overflowX:"auto",gap:0}}>
+          {YEARS.map(y=>{
+            const act=y===year;
+            const cnt=(DB[y]||[]).length;
+            return (
+              <button key={y} onClick={()=>{setYear(y);setFilter("all");setSearch("");}} style={{
+                background:"none",border:"none",
+                borderBottom:act?`2px solid ${C.acc}`:"2px solid transparent",
+                padding:"12px 18px",cursor:"pointer",
+                color:act?C.acc:C.mut,fontSize:13,fontWeight:act?700:400,
+                fontFamily:"inherit",display:"flex",alignItems:"center",gap:7,whiteSpace:"nowrap"}}>
+                {y}
+                <span style={{background:act?C.accBg:C.surfAlt,
+                  color:act?C.acc:C.dim,
+                  borderRadius:10,padding:"1px 7px",fontSize:10,fontWeight:600}}>{cnt}</span>
+              </button>
+            );
+          })}
+        </div>
 
-      {/* Grid */}
-      <main style={{padding:"20px 24px"}}>
-        {visible.length===0 ? (
-          <div style={{textAlign:"center",padding:"60px 0",color:C.dim}}>
-            No results found.
-          </div>
-        ) : (
-          <div style={{display:"grid",
-            gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:14}}>
-            {visible.map(d=><DrugCard key={d.id} drug={d} onClick={()=>setSel(d)}/>)}
-          </div>
-        )}
-      </main>
+        {/* Filters */}
+        <div style={{background:C.surf,padding:"10px 24px",display:"flex",gap:6,
+          flexWrap:"wrap",borderBottom:`1px solid ${C.bdr}`,alignItems:"center"}}>
+          {[
+            ["all",          `All (${drugs.length})`],
+            ["small_molecule",`Small Mol. (${smN})`],
+            ["biologic",     `Biologic (${bioN})`],
+            ["fic",          "First-in-Class"],
+            ["bt",           "Breakthrough"],
+            ["od",           "Orphan Drug"],
+          ].map(([k,l])=>(
+            <button key={k} onClick={()=>setFilter(k)} style={{
+              background:filter===k?C.acc:C.bg,
+              border:`1px solid ${filter===k?C.acc:C.bdr}`,
+              color:filter===k?"#fff":C.mut,
+              borderRadius:6,padding:"4px 12px",fontSize:11,
+              fontWeight:filter===k?600:400,
+              cursor:"pointer",fontFamily:"inherit",transition:"all 0.12s"}}>
+              {l}
+            </button>
+          ))}
+          {search && (
+            <span style={{fontSize:11,color:C.mut,marginLeft:4}}>
+              {visible.length} result{visible.length!==1?"s":""}
+            </span>
+          )}
+        </div>
 
-      {sel && <Modal drug={sel} onClose={()=>setSel(null)}/>}
+        {/* Grid */}
+        <main style={{padding:"20px 24px"}}>
+          {visible.length===0 ? (
+            <div style={{textAlign:"center",padding:"60px 0",color:C.dim}}>
+              No results found.
+            </div>
+          ) : (
+            <div style={{display:"grid",
+              gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:14}}>
+              {visible.map(d=><DrugCard key={d.id} drug={d} onClick={()=>setSel(d)}/>)}
+            </div>
+          )}
+        </main>
+
+        {sel && <Modal drug={sel} onClose={()=>setSel(null)}/>}
+      </>}
+
+      {/* Dashboard view */}
+      {page==="dashboard" && <Dashboard/>}
     </div>
   );
 }
