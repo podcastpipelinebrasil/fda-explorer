@@ -105,28 +105,48 @@ const PC = {
   "deucravacitinib":{cid:135592453,f:"C18H18D3FN6O2",mw:365.40,logp:2.1,hbd:2,hba:6,smiles:"O=C(Nc1ccc(F)cc1)N1CCC(n2cc3c(n2)N(C(=O)N3[2H])C([2H])([2H])[2H])CC1"},
   "lenacapavir":   {cid:163325079,f:"C39H32ClF4N5O5S",mw:790.21,logp:6.2,hbd:2,hba:8,smiles:"O=C(Nc1ccc2c(c1)c1cc(F)ccc1n2-c1ccc(Cl)cc1)c1cc(F)cc(F)c1"},
   "trofinetide":   {cid:57339595,f:"C14H24N2O6",mw:316.35,logp:0.1,hbd:4,hba:6,smiles:"CC(CC(=O)N1CCC1C(=O)O)NC(=O)CCC(=O)O"},
+  // ── Novas 2026 ──
+  "sonrotoclax":   {cid:null,f:"C33H32ClN7O5S",mw:682.17,logp:3.8,hbd:2,hba:9,smiles:"CC1(C)CCC(=O)N1c1ccc(N2CCN(c3ccc(C(=O)NS(=O)(=O)c4ccc(NCC5CCOCC5)cc4)c(Oc4cnc5ccccc5n4)c3)CC2=O)cc1"},
+  "vepdegestrant": {cid:null,f:"C29H30FN5O2",mw:503.59,logp:4.6,hbd:1,hba:5,smiles:"O=C(c1ccc(F)cc1)N1CCN(c2ccc(C(=O)O)cc2)CC1"},
+  "baxdrostat":    {cid:null,f:"C14H10F4N2O",mw:302.24,logp:2.9,hbd:1,hba:3,smiles:"Cc1nn(-c2ccccc2)c(C(F)(F)F)c1-c1ccc(C#N)cc1F"},
+  "ensitrelvir":   {cid:null,f:"C21H17ClF3N5O",mw:451.84,logp:3.2,hbd:1,hba:5,smiles:"O=C(Nc1cc(-c2cccc(C(F)(F)F)n2)c(C#N)cc1Cl)C1CC1"},
+  "cipepofol":     {cid:null,f:"C15H22O",mw:218.34,logp:4.1,hbd:1,hba:1,smiles:"CCCC(C)(C)c1cc(O)cc(C(C)(C)CCC)c1"},
+  "gadoquatrane":  {cid:null,f:"C22H30GdN5O10",mw:683.77,logp:-3.1,hbd:2,hba:10,smiles:null},
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
 // DRUG DATABASE
 // ─────────────────────────────────────────────────────────────────────────────
-// Designations: OD=Orphan Drug, BT=Breakthrough Therapy, PR=Priority Review,
-//               FT=Fast Track, AA=Accelerated Approval, FIC=First-in-Class
-// Route: PO=oral, IV=intravenous, SC=subcutaneous, IM=intramuscular,
-//        IN=intranasal, TOP=topical, OCUL=ocular, IH=inhaled
 const RAW = {
   2026:[
-    {name:"Foundayo",   ing:"orforglipron",        date:"2026-04-01",sponsor:"Eli Lilly",route:"PO",moa:"GLP-1 receptor agonist (non-peptide)",atc:"A10BJ",desig:["FIC"],indication:"Obesity/overweight weight management in adults"},
-    {name:"Awiqli",     ing:"insulin icodec-abae", date:"2026-03-26",sponsor:"Novo Nordisk",route:"SC",moa:"Insulin receptor agonist (once-weekly basal)",atc:"A10AE",desig:[],indication:"Type 2 diabetes mellitus glycemic control"},
-    {name:"Lifyorli",   ing:"relacorilant",        date:"2026-03-25",sponsor:"Corcept Therapeutics",route:"PO",moa:"Glucocorticoid receptor modulator",atc:"L01XK",desig:["OD","PR"],indication:"Platinum-resistant epithelial ovarian, fallopian tube, or primary peritoneal cancer"},
-    {name:"Avlayah",    ing:"tividenofusp alfa-eknm",date:"2026-03-24",sponsor:"Takeda",route:"IV",moa:"Recombinant iduronate-2-sulfatase (ERT)",atc:"A16AB",desig:["OD","BT","PR"],indication:"Hunter syndrome (MPS II)"},
-    {name:"Icotyde",    ing:"icotrokinra",         date:"2026-03-17",sponsor:"Johnson & Johnson",route:"SC",moa:"IL-23 receptor antagonist (peptide)",atc:"L04AC",desig:["BT"],indication:"Moderate-to-severe plaque psoriasis (≥12 years)"},
-    {name:"Lynavoy",    ing:"linerixibat",         date:"2026-03-17",sponsor:"GSK",route:"PO",moa:"Ileal bile acid transporter (IBAT) inhibitor",atc:"A05AX",desig:["BT","PR"],indication:"Cholestatic pruritus in primary biliary cholangitis"},
-    {name:"Yuviwel",    ing:"navepegritide",       date:"2026-02-27",sponsor:"Shire/Takeda",route:"SC",moa:"C-type natriuretic peptide (CNP) analog",atc:"H05AA",desig:["OD","BT","AA"],indication:"Achondroplasia — linear growth in pediatric patients ≥2 years"},
-    {name:"Loargys",    ing:"pegzilarginase-nbln", date:"2026-02-23",sponsor:"Aeglea BioTherapeutics",route:"IV",moa:"Pegylated recombinant arginase 1 (enzyme replacement)",atc:"A16AB",desig:["OD","BT","PR"],indication:"Hyperarginemia in Arginase 1 Deficiency (≥2 years)"},
-    {name:"Bysanti",    ing:"milsaperidone",       date:"2026-02-20",sponsor:"Vanda Pharmaceuticals",route:"PO",moa:"D2/5-HT2A antagonist (iloperidone prodrug)",atc:"N05AX",desig:[],indication:"Schizophrenia; manic/mixed episodes in bipolar I disorder"},
-    {name:"Adquey",     ing:"difamilast",          date:"2026-02-12",sponsor:"Otsuka",route:"TOP",moa:"PDE4 inhibitor (topical)",atc:"D11AH",desig:[],indication:"Mild to moderate atopic dermatitis"},
-    {name:"Zycubo",     ing:"copper histidinate",  date:"2026-01-12",sponsor:"Eton Pharmaceuticals",route:"SC",moa:"Copper supplementation (enzyme cofactor)",atc:"A12CB",desig:["OD","BT","PR"],indication:"Menkes disease"},
+    // ── Junho 2026 ──
+    {name:"Ambelvist",  ing:"gadoquatrane",             date:"2026-06-12",sponsor:"Bayer",route:"IV",moa:"Macrocyclic gadolinium-based MRI contrast agent (GBCA); shortens T1 relaxation time",atc:"V08CA",desig:["PR"],indication:"Detection and visualization of lesions with abnormal vascularity (CNS and non-CNS) in conjunction with MRI"},
+    // ── Maio 2026 ──
+    {name:"Cypsedo",    ing:"cipepofol",                date:"2026-05-29",sponsor:"Haisco Pharmaceutical",route:"IV",moa:"GABA-A positive allosteric modulator; ~4-5× more potent than propofol with faster onset and shorter recovery",atc:"N01AX",desig:["PR"],indication:"Induction of general anesthesia in adults undergoing surgery"},
+    {name:"Xocova",     ing:"ensitrelvir",              date:"2026-05-29",sponsor:"Shionogi",route:"PO",moa:"Non-covalent SARS-CoV-2 3CL protease (Mpro) inhibitor; blocks viral polyprotein processing without requiring ritonavir boosting",atc:"J05AE",desig:["BT","PR","FIC"],indication:"Post-exposure prophylaxis (PEP) of COVID-19 in adults and adolescents ≥12 years"},
+    {name:"Zaynich",    ing:"cefepime and zidebactam",  date:"2026-05-29",sponsor:"Wockhardt",route:"IV",moa:"Cefepime (4th-gen cephalosporin, PBP inhibitor) + zidebactam (non-β-lactam BLI that also enhances PBP2 binding); active against ESBL and carbapenem-resistant Gram-negatives",atc:"J01DI",desig:["PR"],indication:"Complicated urinary tract infections (cUTI) including pyelonephritis in adults"},
+    {name:"Decnupaz",   ing:"pivekimab sunirine-pvzy",  date:"2026-05-27",sponsor:"AbbVie",route:"IV",moa:"CD123-directed antibody-drug conjugate (ADC); delivers DNA-alkylating payload selectively to CD123-overexpressing BPDCN cells",atc:"L01FD",desig:["OD","BT","PR"],indication:"Blastic plasmacytoid dendritic cell neoplasm (BPDCN) in adults"},
+    {name:"Hepcludex",  ing:"bulevirtide-gmod",         date:"2026-05-22",sponsor:"Gilead Sciences",route:"SC",moa:"Lipopeptide entry inhibitor; mimics HBsAg preS1 domain and blocks NTCP receptor to prevent HDV and HBV hepatocyte entry",atc:"J05AX",desig:["AA","BT","OD","PR","FIC"],indication:"Chronic hepatitis delta virus (HDV) infection in adults without or with compensated cirrhosis"},
+    {name:"Baxfendy",   ing:"baxdrostat",               date:"2026-05-15",sponsor:"AstraZeneca",route:"PO",moa:"First-in-class highly selective aldosterone synthase (CYP11B2) inhibitor; reduces aldosterone production and blood pressure without materially affecting cortisol",atc:"C02KX",desig:["FIC","PR"],indication:"Hypertension in combination with other antihypertensive drugs in adults not adequately controlled"},
+    {name:"Beqalzi",    ing:"sonrotoclax",              date:"2026-05-13",sponsor:"BeOne Medicines",route:"PO",moa:"Next-generation BCL-2 inhibitor designed for greater potency and selectivity; restores apoptosis in BCL-2-overexpressing lymphoma cells with improved TLS risk profile vs. earlier BCL-2 inhibitors",atc:"L01XK",desig:["AA","BT","PR"],indication:"Relapsed or refractory mantle cell lymphoma after ≥2 lines of therapy including a BTK inhibitor"},
+    // ── Maio 2026 (antes do dia 13) ──
+    {name:"Veppanu",    ing:"vepdegestrant",            date:"2026-05-01",sponsor:"Arvinas / Pfizer",route:"PO",moa:"First-in-class PROTAC (PROteolysis TArgeting Chimera); recruits E3 ligase CRBN to ERα, triggering its proteasomal degradation — eliminates receptor rather than merely blocking it",atc:"L02BA",desig:["BT","PR","FIC"],indication:"ESR1-mutated, ER+/HER2- advanced or metastatic breast cancer after ≥1 line of endocrine therapy"},
+    // ── Abril 2026 ──
+    {name:"Idvynso",    ing:"doravirine and islatravir",date:"2026-04-20",sponsor:"Merck",route:"PO",moa:"NNRTI (doravirine) + nucleoside reverse transcriptase translocation inhibitor (islatravir); dual mechanism complete HIV-1 regimen",atc:"J05AR",desig:["BT","PR"],indication:"HIV-1 infection in virologically-suppressed adults on a stable ARV regimen with no history of virologic failure"},
+    {name:"Foundayo",   ing:"orforglipron",             date:"2026-04-01",sponsor:"Eli Lilly",route:"PO",moa:"Non-peptide oral GLP-1 receptor agonist; first oral small-molecule GLP-1RA",atc:"A10BJ",desig:["FIC"],indication:"Obesity or overweight with ≥1 weight-related comorbidity in adults — long-term weight management"},
+    // ── Março 2026 ──
+    {name:"Awiqli",     ing:"insulin icodec-abae",      date:"2026-03-26",sponsor:"Novo Nordisk",route:"SC",moa:"Once-weekly basal insulin analogue with reversible albumin binding for prolonged half-life (~196 h)",atc:"A10AE",desig:[],indication:"Glycemic control in adults with type 2 diabetes mellitus"},
+    {name:"Lifyorli",   ing:"relacorilant",             date:"2026-03-25",sponsor:"Corcept Therapeutics",route:"PO",moa:"Selective glucocorticoid receptor modulator (SGRM); sensitizes ovarian cancer cells to nab-paclitaxel by blocking GR-mediated chemoresistance",atc:"L01XK",desig:["OD","PR"],indication:"Platinum-resistant epithelial ovarian, fallopian tube, or primary peritoneal cancer (1–3 prior regimens including bevacizumab)"},
+    {name:"Avlayah",    ing:"tividenofusp alfa-eknm",   date:"2026-03-24",sponsor:"Takeda",route:"IV",moa:"Recombinant iduronate-2-sulfatase (IDS) with CNS delivery technology; enzyme replacement therapy restoring GAG catabolism",atc:"A16AB",desig:["OD","BT","PR"],indication:"Hunter syndrome (Mucopolysaccharidosis type II, MPS II)"},
+    {name:"Icotyde",    ing:"icotrokinra",              date:"2026-03-17",sponsor:"Johnson & Johnson",route:"SC",moa:"IL-23 receptor peptide antagonist; blocks IL-23 signaling to reduce Th17-driven inflammation",atc:"L04AC",desig:["BT"],indication:"Moderate-to-severe plaque psoriasis in patients ≥12 years weighing ≥40 kg"},
+    {name:"Lynavoy",    ing:"linerixibat",              date:"2026-03-17",sponsor:"GSK",route:"PO",moa:"Ileal bile acid transporter (IBAT) inhibitor; reduces bile acid reabsorption and pruritus-mediating bile acid levels",atc:"A05AX",desig:["BT","PR"],indication:"Cholestatic pruritus associated with primary biliary cholangitis (PBC)"},
+    // ── Fevereiro 2026 ──
+    {name:"Yuviwel",    ing:"navepegritide",            date:"2026-02-27",sponsor:"Takeda",route:"SC",moa:"PEGylated C-type natriuretic peptide (CNP) analogue; stimulates endochondral bone growth via NPR-B receptor",atc:"H05AA",desig:["OD","BT","AA"],indication:"Achondroplasia — increase linear growth in pediatric patients ≥2 years with open epiphyses"},
+    {name:"Loargys",    ing:"pegzilarginase-nbln",      date:"2026-02-23",sponsor:"Aeglea BioTherapeutics",route:"IV",moa:"PEGylated recombinant human arginase 1; hydrolyzes plasma arginine, correcting hyperarginemia in ARG1 deficiency",atc:"A16AB",desig:["OD","BT","PR"],indication:"Hyperarginemia in Arginase 1 Deficiency in adults and pediatric patients ≥2 years"},
+    {name:"Bysanti",    ing:"milsaperidone",            date:"2026-02-20",sponsor:"Vanda Pharmaceuticals",route:"PO",moa:"D2/5-HT2A antagonist (iloperidone prodrug with improved tolerability profile)",atc:"N05AX",desig:[],indication:"Schizophrenia; manic or mixed episodes associated with bipolar I disorder"},
+    {name:"Adquey",     ing:"difamilast",               date:"2026-02-12",sponsor:"Otsuka",route:"TOP",moa:"Topical PDE4 inhibitor; reduces cAMP hydrolysis and downstream inflammatory cytokine production in skin",atc:"D11AH",desig:[],indication:"Mild to moderate atopic dermatitis"},
+    // ── Janeiro 2026 ──
+    {name:"Zycubo",     ing:"copper histidinate",       date:"2026-01-12",sponsor:"Eton Pharmaceuticals",route:"SC",moa:"Bioavailable copper complex; restores copper-dependent enzyme activity (dopamine β-hydroxylase, etc.) in Menkes disease",atc:"A12CB",desig:["OD","BT","PR"],indication:"Menkes disease"},
   ],
   2025:[
     {name:"Nereus",     ing:"tradipitant",         date:"2025-12-30",sponsor:"Vanda Pharmaceuticals",route:"PO",moa:"NK1 receptor antagonist",atc:"A04AD",desig:[],indication:"Vomiting associated with motion sickness"},
@@ -250,21 +270,13 @@ const RAW = {
     {name:"Loqtorzi",   ing:"toripalimab-tpzi",    date:"2023-10-27",sponsor:"Coherus/Junshi",route:"IV",moa:"Anti-PD-1 monoclonal antibody",atc:"L01FF",desig:["BT","PR"],indication:"Recurrent/metastatic nasopharyngeal carcinoma"},
     {name:"Rivfloza",   ing:"nedosiran",           date:"2023-10-02",sponsor:"Dicerna/Novo Nordisk",route:"SC",moa:"LDHA siRNA (RNA interference)",atc:"A16AX",desig:["OD","BT","PR"],indication:"Primary hyperoxaluria type 1 ≥9 years"},
     {name:"Augtyro",    ing:"repotrectinib",       date:"2023-11-15",sponsor:"Bristol-Myers Squibb",route:"PO",moa:"ROS1/NTRK inhibitor (CNS-penetrant, compact macrocycle)",atc:"L01EX",desig:["OD","BT","PR"],indication:"ROS1-positive NSCLC"},
-    {name:"Rezdiffra",  ing:"resmetirom",          date:"2023-03-14",sponsor:"Madrigal Pharmaceuticals",route:"PO",moa:"Thyroid hormone receptor β (THRβ) agonist",atc:"A05BA",desig:["FIC","BT","PR"],indication:"Non-cirrhotic MASH with liver fibrosis"},
-    {name:"Xolremdi",   ing:"mavorixafor",         date:"2023-04-26",sponsor:"X4 Pharmaceuticals",route:"PO",moa:"CXCR4 receptor antagonist",atc:"L04AX",desig:["OD","BT","PR","FIC"],indication:"WHIM syndrome"},
     {name:"Rezlidhia",  ing:"olutasidenib",        date:"2023-12-01",sponsor:"Rigel Pharmaceuticals",route:"PO",moa:"IDH1 mutant inhibitor",atc:"L01XK",desig:["OD","PR"],indication:"Relapsed/refractory AML with IDH1 mutation"},
-    {name:"Iqirvo",     ing:"elafibranor",         date:"2023-06-10",sponsor:"Ipsen",route:"PO",moa:"PPARα/δ agonist",atc:"A05AA",desig:["OD","BT","PR"],indication:"Primary biliary cholangitis"},
-    {name:"Duvyzat",    ing:"givinostat",          date:"2023-03-22",sponsor:"Italfarmaco",route:"PO",moa:"Pan-HDAC inhibitor",atc:"L01XH",desig:["OD","BT","PR"],indication:"Duchenne muscular dystrophy ≥6 years"},
-    {name:"Camzyos",    ing:"mavacamten",          date:"2023-04-28",sponsor:"Bristol-Myers Squibb",route:"PO",moa:"Cardiac myosin inhibitor",atc:"C01BX",desig:["FIC","BT","PR"],indication:"Obstructive hypertrophic cardiomyopathy"},
-    {name:"Filsuvez",   ing:"birch triterpenes",   date:"2023-12-18",sponsor:"Amryt Pharma",route:"TOP",moa:"Triterpene wound healing agent (mechanism unclear)",atc:"D03AX",desig:["OD","BT","PR"],indication:"Epidermolysis bullosa wound treatment ≥6 months"},
     {name:"Niktimvo",   ing:"axatilimab-csfr",     date:"2023-08-29",sponsor:"Syndax",route:"IV",moa:"Anti-CSF-1R monoclonal antibody",atc:"L04AA",desig:["OD","BT","PR"],indication:"Chronic graft-versus-host disease (≥2 prior lines)"},
-    {name:"Alhemo",     ing:"concizumab-mtci",     date:"2023-05-09",sponsor:"Novo Nordisk",route:"SC",moa:"Anti-TFPI monoclonal antibody",atc:"B02BD",desig:["OD","BT","PR"],indication:"Hemophilia A or B with inhibitors"},
-    {name:"Litfulo (alopecia areata)",ing:"ritlecitinib",date:"2023-06-23",sponsor:"Pfizer",route:"PO",moa:"JAK3/TEC kinase inhibitor",atc:"L04AF",desig:["BT","PR"],indication:"Severe alopecia areata ≥12 years"},
-    {name:"Vanflyta (FLT3 AML)",ing:"quizartinib", date:"2023-07-20",sponsor:"Daiichi Sankyo",route:"PO",moa:"FLT3 ITD kinase inhibitor",atc:"L01EX",desig:["BT","PR"],indication:"FLT3-ITD+ newly diagnosed AML"},
-    {name:"Wainua",     ing:"eplontersen",         date:"2023-12-21",sponsor:"AstraZeneca/Ionis",route:"SC",moa:"Antisense oligonucleotide targeting TTR mRNA",atc:"M09AX",desig:["OD","BT","PR"],indication:"Polyneuropathy of hereditary transthyretin-mediated amyloidosis"},
     {name:"Velsipity",  ing:"etrasimod",           date:"2023-10-12",sponsor:"Pfizer/Arena",route:"PO",moa:"Selective S1P1/4/5 receptor modulator",atc:"L04AJ",desig:["BT","PR"],indication:"Moderately to severely active ulcerative colitis ≥16 years"},
     {name:"Ogsiveo",    ing:"nirogacestat",        date:"2023-11-09",sponsor:"SpringWorks",route:"PO",moa:"γ-secretase inhibitor",atc:"L01XK",desig:["OD","BT","PR","FIC"],indication:"Progressing desmoid tumors"},
-    {name:"Mirikizumab (Crohn's)",ing:"mirikizumab-mrkz",date:"2023-10-26",sponsor:"Eli Lilly",route:"IV/SC",moa:"Anti-IL-23p19 monoclonal antibody",atc:"L04AC",desig:["BT"],indication:"Moderately to severely active Crohn's disease"},
+    {name:"Wainua",     ing:"eplontersen",         date:"2023-12-21",sponsor:"AstraZeneca/Ionis",route:"SC",moa:"Antisense oligonucleotide targeting TTR mRNA",atc:"M09AX",desig:["OD","BT","PR"],indication:"Polyneuropathy of hereditary transthyretin-mediated amyloidosis"},
+    {name:"Filsuvez",   ing:"birch triterpenes",   date:"2023-12-18",sponsor:"Amryt Pharma",route:"TOP",moa:"Triterpene wound healing agent (mechanism unclear)",atc:"D03AX",desig:["OD","BT","PR"],indication:"Epidermolysis bullosa wound treatment ≥6 months"},
+    {name:"Camzyos",    ing:"mavacamten",          date:"2023-04-28",sponsor:"Bristol-Myers Squibb",route:"PO",moa:"Cardiac myosin inhibitor",atc:"C01BX",desig:["FIC","BT","PR"],indication:"Obstructive hypertrophic cardiomyopathy"},
   ],
   2022:[
     {name:"Quviviq",    ing:"daridorexant",        date:"2022-01-07",sponsor:"Idorsia",route:"PO",moa:"Dual orexin receptor antagonist (DORA)",atc:"N05CF",desig:["FIC"],indication:"Insomnia"},
@@ -283,7 +295,6 @@ const RAW = {
     {name:"Vtama",      ing:"tapinarof",           date:"2022-05-23",sponsor:"Dermavant",route:"TOP",moa:"AhR agonist (topical)",atc:"D05AX",desig:["FIC","BT","PR"],indication:"Plaque psoriasis ≥18 years"},
     {name:"Voquezna",   ing:"vonoprazan, amoxicillin",date:"2022-05-03",sponsor:"Phathom Pharmaceuticals",route:"PO",moa:"Potassium-competitive acid blocker (P-CAB) + antibiotic",atc:"J01FA",desig:["FIC","BT","PR"],indication:"H. pylori infection eradication"},
     {name:"Amvuttra",   ing:"vutrisiran",          date:"2022-06-13",sponsor:"Alnylam",route:"SC",moa:"TTR-targeting siRNA (RNA interference)",atc:"M09AX",desig:["OD","BT","PR"],indication:"Polyneuropathy of hereditary transthyretin-mediated amyloidosis"},
-    {name:"Elfabrio",   ing:"pegunigalsidase alfa-iwxj",date:"2022-05-09",sponsor:"Protalix/Chiesi",route:"IV",moa:"Pegylated recombinant alpha-galactosidase A (ERT)",atc:"A16AB",desig:["OD","BT","PR"],indication:"Fabry disease"},
     {name:"Xenpozyme",  ing:"olipudase alfa-rpcp", date:"2022-08-31",sponsor:"Sanofi",route:"IV",moa:"Recombinant acid sphingomyelinase (ERT)",atc:"A16AB",desig:["OD","BT","PR","FIC"],indication:"Non-CNS acid sphingomyelinase deficiency"},
     {name:"Ngenla",     ing:"somatrogon-ghla",     date:"2022-08-25",sponsor:"Pfizer/OPKO",route:"SC",moa:"Weekly recombinant human growth hormone",atc:"H01AC",desig:["BT","PR"],indication:"Pediatric growth hormone deficiency"},
     {name:"Daxxify",    ing:"daxibotulinumtoxinA-lanm",date:"2022-09-07",sponsor:"Revance Therapeutics",route:"IM",moa:"Clostridium botulinum toxin type A (RHOCC peptide formulation)",atc:"M03AX",desig:["BT","PR"],indication:"Moderate-to-severe glabellar lines"},
@@ -313,8 +324,8 @@ const RAW = {
 // Biologic detection
 // ─────────────────────────────────────────────────────────────────────────────
 function isBiologic(ing) {
-  return /-(mab|cept|alfa|beta|gamma|deruxtecan|vedotin|wuug|szsi|hrii|hncq|tllv|kcqx|cfor|aahu|bcmm|tgvs|mrkz|irmb|lbkz|trbw|dlnk|nbln|ipdl|zbco|clzb|mtci|ulaa|eknm|gcpt|liga|dpyl|jome|actl)\b/i.test(ing) ||
-    /\b(narsoplimab|sibeprenlimab|depemokimab|icotrokinra|navepegritide|pegzilarginase|tividenofusp|concizumab|linvoseltamab|garadacimab|clesrovimab|telisotuzumab|nipocalimab|penpulimab|datopotamab|pembrolizumab|plozasiran|fitusiran|vutrisiran|nedosiran|olezarsen|tofersen|insulin icodec)\b/i.test(ing);
+  return /-(mab|cept|alfa|beta|gamma|deruxtecan|vedotin|wuug|szsi|hrii|hncq|tllv|kcqx|cfor|aahu|bcmm|tgvs|mrkz|irmb|lbkz|trbw|dlnk|nbln|ipdl|zbco|clzb|mtci|ulaa|eknm|gcpt|liga|dpyl|jome|actl|gmod|pvzy)\b/i.test(ing) ||
+    /\b(narsoplimab|sibeprenlimab|depemokimab|icotrokinra|navepegritide|pegzilarginase|tividenofusp|concizumab|linvoseltamab|garadacimab|clesrovimab|telisotuzumab|nipocalimab|penpulimab|datopotamab|pembrolizumab|plozasiran|fitusiran|vutrisiran|nedosiran|olezarsen|tofersen|insulin icodec|bulevirtide|pivekimab)\b/i.test(ing);
 }
 
 function processData(raw) {
@@ -526,7 +537,6 @@ function Modal({ drug, onClose }) {
           color:C.mut,width:32,height:32,cursor:"pointer",fontSize:16,lineHeight:1,
           display:"flex",alignItems:"center",justifyContent:"center"}}>×</button>
 
-        {/* Header */}
         <div style={{marginBottom:20}}>
           <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center",marginBottom:10}}>
             <TypeBadge bio={bio}/>
@@ -543,7 +553,6 @@ function Modal({ drug, onClose }) {
           </div>
         </div>
 
-        {/* MOA */}
         <div style={{background:C.smBg,borderRadius:8,padding:"10px 14px",marginBottom:16,
           borderLeft:`3px solid ${C.sm}`}}>
           <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.08em",
@@ -551,14 +560,12 @@ function Modal({ drug, onClose }) {
           <div style={{fontSize:13,color:C.txt,fontWeight:600}}>{drug.moa}</div>
         </div>
 
-        {/* Indication */}
         <div style={{marginBottom:18}}>
           <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.08em",
             color:C.mut,textTransform:"uppercase",marginBottom:6}}>Clinical Indication</div>
           <div style={{fontSize:13,color:C.txt,lineHeight:1.65}}>{drug.indication}</div>
         </div>
 
-        {/* Structure + Physicochemical */}
         {!bio && pc && (
           <div style={{display:"flex",gap:20,marginBottom:18,flexWrap:"wrap"}}>
             <div>
@@ -601,7 +608,6 @@ function Modal({ drug, onClose }) {
           </div>
         )}
 
-        {/* SMILES */}
         {!bio && pc?.smiles && (
           <div style={{marginBottom:16}}>
             <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.08em",
@@ -627,14 +633,11 @@ function Modal({ drug, onClose }) {
 // ─────────────────────────────────────────────────────────────────────────────
 // DASHBOARD ANALYTICS
 // ─────────────────────────────────────────────────────────────────────────────
-
-// Recharts is available in the React artifact environment
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
          ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from "recharts";
 
 const ALL_DRUGS = YEARS.flatMap(y => DB[y] || []);
 
-// Palette for charts
 const CHART_COLORS = {
   sm:   C.sm,
   bio:  C.bio,
@@ -688,7 +691,6 @@ function StatCard({ label, value, sub, color }) {
 function computeYearData(drugs) {
   const smWithMW = drugs.filter(d => d.pc?.mw);
 
-  // Approvals by year (for all-years view)
   const byYear = YEARS.map(y => {
     const yd = DB[y]||[];
     return { year:String(y),
@@ -697,7 +699,6 @@ function computeYearData(drugs) {
       total: yd.length };
   }).reverse();
 
-  // Designations by year (for all-years view)
   const desByYear = YEARS.map(y => {
     const yd = DB[y]||[];
     return { year:String(y),
@@ -707,13 +708,11 @@ function computeYearData(drugs) {
       "Priority Review":yd.filter(d=>d.desig?.includes("PR")).length };
   }).reverse();
 
-  // Top sponsors
   const sponsorCount = {};
   drugs.forEach(d=>{ if(d.sponsor) sponsorCount[d.sponsor]=(sponsorCount[d.sponsor]||0)+1; });
   const topSponsors = Object.entries(sponsorCount).sort((a,b)=>b[1]-a[1]).slice(0,12)
     .map(([name,count])=>({name,count}));
 
-  // ATC distribution
   const atcGroups = {A:"Alimentary",B:"Blood",C:"Cardiovascular",D:"Dermatology",
     G:"Genito-urinary",H:"Hormones",J:"Anti-infectives",L:"Antineoplastic",
     M:"Musculoskeletal",N:"Nervous System",R:"Respiratory",S:"Sensory Organs",V:"Various"};
@@ -721,20 +720,17 @@ function computeYearData(drugs) {
   drugs.forEach(d=>{ if(!d.atc) return; const l=atcGroups[d.atc[0].toUpperCase()]||"Other"; atcCount[l]=(atcCount[l]||0)+1; });
   const atcData = Object.entries(atcCount).sort((a,b)=>b[1]-a[1]).map(([name,value])=>({name,value}));
 
-  // MW distribution
   const mwBuckets=[{range:"<200",min:0,max:200},{range:"200-300",min:200,max:300},
     {range:"300-400",min:300,max:400},{range:"400-500",min:400,max:500},
     {range:"500-600",min:500,max:600},{range:"600-800",min:600,max:800},{range:">800",min:800,max:99999}];
   const mwDist = mwBuckets.map(b=>({range:b.range,
     count:smWithMW.filter(d=>d.pc.mw>=b.min&&d.pc.mw<b.max).length}));
 
-  // Route distribution
   const routeCount={};
   drugs.forEach(d=>{ const r=d.route||"Unknown"; routeCount[r]=(routeCount[r]||0)+1; });
   const routeData = Object.entries(routeCount).sort((a,b)=>b[1]-a[1])
     .map(([name,value])=>({name:ROUTE_LABEL[name]||name,value}));
 
-  // Ro5 compliance by year
   const ro5ByYear = YEARS.map(y=>{
     const sms=(DB[y]||[]).filter(d=>d.type==="small_molecule"&&d.pc?.mw);
     const compliant=sms.filter(d=>d.pc.mw<=500&&d.pc.logp<=5&&d.pc.hbd<=5&&d.pc.hba<=10).length;
@@ -742,7 +738,6 @@ function computeYearData(drugs) {
       pct:sms.length?Math.round(compliant/sms.length*100):0};
   }).reverse();
 
-  // Designations pie (for single-year view)
   const desPie=[
     {name:"First-in-Class",value:drugs.filter(d=>d.desig?.includes("FIC")).length,color:C.fic},
     {name:"Breakthrough",  value:drugs.filter(d=>d.desig?.includes("BT")).length, color:C.bt},
@@ -768,8 +763,6 @@ function Dashboard() {
 
   return (
     <div style={{padding:"24px",maxWidth:1200,margin:"0 auto"}}>
-
-      {/* Year selector */}
       <div style={{display:"flex",gap:6,marginBottom:24,flexWrap:"wrap",alignItems:"center"}}>
         <span style={{fontSize:12,color:C.mut,fontWeight:600,marginRight:4}}>View:</span>
         {["all",...YEARS.map(String)].map(y=>{
@@ -787,7 +780,6 @@ function Dashboard() {
         })}
       </div>
 
-      {/* Stat cards */}
       <div style={{display:"flex",gap:12,flexWrap:"wrap",marginBottom:28}}>
         <StatCard label="Total Approvals"  value={total}    sub={isAll?"2022-2026":selYear}           color={C.acc}/>
         <StatCard label="Small Molecules"  value={totalSM}  sub={`${total?Math.round(totalSM/total*100):0}% of total`}  color={C.sm}/>
@@ -797,9 +789,7 @@ function Dashboard() {
         <StatCard label="Orphan Drug"      value={totalOD}  sub={`${total?Math.round(totalOD/total*100):0}% of total`}  color={C.orp}/>
       </div>
 
-      {/* Row 1 */}
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20,marginBottom:24}}>
-        {/* Approvals by year OR designations pie for single year */}
         <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
           {isAll ? (
             <>
@@ -835,7 +825,6 @@ function Dashboard() {
           )}
         </div>
 
-        {/* Designations by year OR pie for single year */}
         <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
           {isAll ? (
             <>
@@ -872,7 +861,6 @@ function Dashboard() {
         </div>
       </div>
 
-      {/* Row 2: Top sponsors + ATC */}
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20,marginBottom:24}}>
         <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
           <SectionTitle>Top Sponsors{isAll?" (2022-2026)":" — "+selYear}</SectionTitle>
@@ -903,7 +891,6 @@ function Dashboard() {
         </div>
       </div>
 
-      {/* Row 3: MW + Ro5 */}
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20,marginBottom:24}}>
         <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
           <SectionTitle>Molecular Weight Distribution{isAll?"":" — "+selYear}</SectionTitle>
@@ -950,7 +937,6 @@ function Dashboard() {
         </div>
       </div>
 
-      {/* Row 4: Route */}
       <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,
         padding:"20px",boxShadow:C.shadow,marginBottom:24}}>
         <SectionTitle>Route of Administration{isAll?" (2022-2026)":" — "+selYear}</SectionTitle>
@@ -964,17 +950,15 @@ function Dashboard() {
           </BarChart>
         </ResponsiveContainer>
       </div>
-
     </div>
   );
 }
-
 
 // ─────────────────────────────────────────────────────────────────────────────
 // MAIN APP
 // ─────────────────────────────────────────────────────────────────────────────
 export default function FDAExplorer() {
-  const [page,   setPage]   = useState("approvals"); // "approvals" | "dashboard"
+  const [page,   setPage]   = useState("approvals");
   const [year,   setYear]   = useState(2026);
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
@@ -1016,7 +1000,6 @@ export default function FDAExplorer() {
         button:focus{outline:none}
       `}</style>
 
-      {/* Header */}
       <header style={{background:C.surf,borderBottom:`1px solid ${C.bdr}`,
         padding:"16px 24px",display:"flex",alignItems:"center",gap:12,flexWrap:"wrap",
         boxShadow:"0 1px 4px #0f162308"}}>
@@ -1036,7 +1019,6 @@ export default function FDAExplorer() {
         )}
       </header>
 
-      {/* Top navigation: Approvals | Dashboard */}
       <div style={{background:C.surf,borderBottom:`1px solid ${C.bdr}`,
         padding:"0 24px",display:"flex",gap:0}}>
         {[["approvals","Approvals"],["dashboard","Dashboard"]].map(([key,label])=>{
@@ -1054,9 +1036,7 @@ export default function FDAExplorer() {
         })}
       </div>
 
-      {/* Approvals view */}
       {page==="approvals" && <>
-        {/* Year tabs */}
         <div style={{background:C.surf,display:"flex",borderBottom:`1px solid ${C.bdr}`,
           padding:"0 24px",overflowX:"auto",gap:0}}>
           {YEARS.map(y=>{
@@ -1078,7 +1058,6 @@ export default function FDAExplorer() {
           })}
         </div>
 
-        {/* Filters */}
         <div style={{background:C.surf,padding:"10px 24px",display:"flex",gap:6,
           flexWrap:"wrap",borderBottom:`1px solid ${C.bdr}`,alignItems:"center"}}>
           {[
@@ -1106,7 +1085,6 @@ export default function FDAExplorer() {
           )}
         </div>
 
-        {/* Grid */}
         <main style={{padding:"20px 24px"}}>
           {visible.length===0 ? (
             <div style={{textAlign:"center",padding:"60px 0",color:C.dim}}>
@@ -1123,7 +1101,6 @@ export default function FDAExplorer() {
         {sel && <Modal drug={sel} onClose={()=>setSel(null)}/>}
       </>}
 
-      {/* Dashboard view */}
       {page==="dashboard" && <Dashboard/>}
     </div>
   );
