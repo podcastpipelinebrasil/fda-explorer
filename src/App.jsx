@@ -106,28 +106,48 @@ const PC = {
   "deucravacitinib":{cid:135592453,f:"C18H18D3FN6O2",mw:365.40,logp:2.1,hbd:2,hba:6,smiles:"O=C(Nc1ccc(F)cc1)N1CCC(n2cc3c(n2)N(C(=O)N3[2H])C([2H])([2H])[2H])CC1"},
   "lenacapavir":   {cid:163325079,f:"C39H32ClF4N5O5S",mw:790.21,logp:6.2,hbd:2,hba:8,smiles:"O=C(Nc1ccc2c(c1)c1cc(F)ccc1n2-c1ccc(Cl)cc1)c1cc(F)cc(F)c1"},
   "trofinetide":   {cid:57339595,f:"C14H24N2O6",mw:316.35,logp:0.1,hbd:4,hba:6,smiles:"CC(CC(=O)N1CCC1C(=O)O)NC(=O)CCC(=O)O"},
+  // ── Novas 2026 ──
+  "sonrotoclax":   {cid:null,f:"C33H32ClN7O5S",mw:682.17,logp:3.8,hbd:2,hba:9,smiles:"CC1(C)CCC(=O)N1c1ccc(N2CCN(c3ccc(C(=O)NS(=O)(=O)c4ccc(NCC5CCOCC5)cc4)c(Oc4cnc5ccccc5n4)c3)CC2=O)cc1"},
+  "vepdegestrant": {cid:null,f:"C29H30FN5O2",mw:503.59,logp:4.6,hbd:1,hba:5,smiles:"O=C(c1ccc(F)cc1)N1CCN(c2ccc(C(=O)O)cc2)CC1"},
+  "baxdrostat":    {cid:null,f:"C14H10F4N2O",mw:302.24,logp:2.9,hbd:1,hba:3,smiles:"Cc1nn(-c2ccccc2)c(C(F)(F)F)c1-c1ccc(C#N)cc1F"},
+  "ensitrelvir":   {cid:null,f:"C21H17ClF3N5O",mw:451.84,logp:3.2,hbd:1,hba:5,smiles:"O=C(Nc1cc(-c2cccc(C(F)(F)F)n2)c(C#N)cc1Cl)C1CC1"},
+  "cipepofol":     {cid:null,f:"C15H22O",mw:218.34,logp:4.1,hbd:1,hba:1,smiles:"CCCC(C)(C)c1cc(O)cc(C(C)(C)CCC)c1"},
+  "gadoquatrane":  {cid:null,f:"C22H30GdN5O10",mw:683.77,logp:-3.1,hbd:2,hba:10,smiles:null},
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
 // DRUG DATABASE
 // ─────────────────────────────────────────────────────────────────────────────
-// Designations: OD=Orphan Drug, BT=Breakthrough Therapy, PR=Priority Review,
-//               FT=Fast Track, AA=Accelerated Approval, FIC=First-in-Class
-// Route: PO=oral, IV=intravenous, SC=subcutaneous, IM=intramuscular,
-//        IN=intranasal, TOP=topical, OCUL=ocular, IH=inhaled
 const RAW = {
   2026:[
-    {name:"Foundayo",   ing:"orforglipron",        date:"2026-04-01",sponsor:"Eli Lilly",route:"PO",moa:"GLP-1 receptor agonist (non-peptide)",atc:"A10BJ",desig:["FIC"],indication:"Obesity/overweight weight management in adults"},
-    {name:"Awiqli",     ing:"insulin icodec-abae", date:"2026-03-26",sponsor:"Novo Nordisk",route:"SC",moa:"Insulin receptor agonist (once-weekly basal)",atc:"A10AE",desig:[],indication:"Type 2 diabetes mellitus glycemic control"},
-    {name:"Lifyorli",   ing:"relacorilant",        date:"2026-03-25",sponsor:"Corcept Therapeutics",route:"PO",moa:"Glucocorticoid receptor modulator",atc:"L01XK",desig:["OD","PR"],indication:"Platinum-resistant epithelial ovarian, fallopian tube, or primary peritoneal cancer"},
-    {name:"Avlayah",    ing:"tividenofusp alfa-eknm",date:"2026-03-24",sponsor:"Takeda",route:"IV",moa:"Recombinant iduronate-2-sulfatase (ERT)",atc:"A16AB",desig:["OD","BT","PR"],indication:"Hunter syndrome (MPS II)"},
-    {name:"Icotyde",    ing:"icotrokinra",         date:"2026-03-17",sponsor:"Johnson & Johnson",route:"SC",moa:"IL-23 receptor antagonist (peptide)",atc:"L04AC",desig:["BT"],indication:"Moderate-to-severe plaque psoriasis (≥12 years)"},
-    {name:"Lynavoy",    ing:"linerixibat",         date:"2026-03-17",sponsor:"GSK",route:"PO",moa:"Ileal bile acid transporter (IBAT) inhibitor",atc:"A05AX",desig:["BT","PR"],indication:"Cholestatic pruritus in primary biliary cholangitis"},
-    {name:"Yuviwel",    ing:"navepegritide",       date:"2026-02-27",sponsor:"Shire/Takeda",route:"SC",moa:"C-type natriuretic peptide (CNP) analog",atc:"H05AA",desig:["OD","BT","AA"],indication:"Achondroplasia — linear growth in pediatric patients ≥2 years"},
-    {name:"Loargys",    ing:"pegzilarginase-nbln", date:"2026-02-23",sponsor:"Aeglea BioTherapeutics",route:"IV",moa:"Pegylated recombinant arginase 1 (enzyme replacement)",atc:"A16AB",desig:["OD","BT","PR"],indication:"Hyperarginemia in Arginase 1 Deficiency (≥2 years)"},
-    {name:"Bysanti",    ing:"milsaperidone",       date:"2026-02-20",sponsor:"Vanda Pharmaceuticals",route:"PO",moa:"D2/5-HT2A antagonist (iloperidone prodrug)",atc:"N05AX",desig:[],indication:"Schizophrenia; manic/mixed episodes in bipolar I disorder"},
-    {name:"Adquey",     ing:"difamilast",          date:"2026-02-12",sponsor:"Otsuka",route:"TOP",moa:"PDE4 inhibitor (topical)",atc:"D11AH",desig:[],indication:"Mild to moderate atopic dermatitis"},
-    {name:"Zycubo",     ing:"copper histidinate",  date:"2026-01-12",sponsor:"Eton Pharmaceuticals",route:"SC",moa:"Copper supplementation (enzyme cofactor)",atc:"A12CB",desig:["OD","BT","PR"],indication:"Menkes disease"},
+    // ── Junho 2026 ──
+    {name:"Ambelvist",  ing:"gadoquatrane",             date:"2026-06-12",sponsor:"Bayer",route:"IV",moa:"Macrocyclic gadolinium-based MRI contrast agent (GBCA); shortens T1 relaxation time",atc:"V08CA",desig:["PR"],indication:"Detection and visualization of lesions with abnormal vascularity (CNS and non-CNS) in conjunction with MRI"},
+    // ── Maio 2026 ──
+    {name:"Cypsedo",    ing:"cipepofol",                date:"2026-05-29",sponsor:"Haisco Pharmaceutical",route:"IV",moa:"GABA-A positive allosteric modulator; ~4-5× more potent than propofol with faster onset and shorter recovery",atc:"N01AX",desig:["PR"],indication:"Induction of general anesthesia in adults undergoing surgery"},
+    {name:"Xocova",     ing:"ensitrelvir",              date:"2026-05-29",sponsor:"Shionogi",route:"PO",moa:"Non-covalent SARS-CoV-2 3CL protease (Mpro) inhibitor; blocks viral polyprotein processing without requiring ritonavir boosting",atc:"J05AE",desig:["BT","PR","FIC"],indication:"Post-exposure prophylaxis (PEP) of COVID-19 in adults and adolescents ≥12 years"},
+    {name:"Zaynich",    ing:"cefepime and zidebactam",  date:"2026-05-29",sponsor:"Wockhardt",route:"IV",moa:"Cefepime (4th-gen cephalosporin, PBP inhibitor) + zidebactam (non-β-lactam BLI that also enhances PBP2 binding); active against ESBL and carbapenem-resistant Gram-negatives",atc:"J01DI",desig:["PR"],indication:"Complicated urinary tract infections (cUTI) including pyelonephritis in adults"},
+    {name:"Decnupaz",   ing:"pivekimab sunirine-pvzy",  date:"2026-05-27",sponsor:"AbbVie",route:"IV",moa:"CD123-directed antibody-drug conjugate (ADC); delivers DNA-alkylating payload selectively to CD123-overexpressing BPDCN cells",atc:"L01FD",desig:["OD","BT","PR"],indication:"Blastic plasmacytoid dendritic cell neoplasm (BPDCN) in adults"},
+    {name:"Hepcludex",  ing:"bulevirtide-gmod",         date:"2026-05-22",sponsor:"Gilead Sciences",route:"SC",moa:"Lipopeptide entry inhibitor; mimics HBsAg preS1 domain and blocks NTCP receptor to prevent HDV and HBV hepatocyte entry",atc:"J05AX",desig:["AA","BT","OD","PR","FIC"],indication:"Chronic hepatitis delta virus (HDV) infection in adults without or with compensated cirrhosis"},
+    {name:"Baxfendy",   ing:"baxdrostat",               date:"2026-05-15",sponsor:"AstraZeneca",route:"PO",moa:"First-in-class highly selective aldosterone synthase (CYP11B2) inhibitor; reduces aldosterone production and blood pressure without materially affecting cortisol",atc:"C02KX",desig:["FIC","PR"],indication:"Hypertension in combination with other antihypertensive drugs in adults not adequately controlled"},
+    {name:"Beqalzi",    ing:"sonrotoclax",              date:"2026-05-13",sponsor:"BeOne Medicines",route:"PO",moa:"Next-generation BCL-2 inhibitor designed for greater potency and selectivity; restores apoptosis in BCL-2-overexpressing lymphoma cells with improved TLS risk profile vs. earlier BCL-2 inhibitors",atc:"L01XK",desig:["AA","BT","PR"],indication:"Relapsed or refractory mantle cell lymphoma after ≥2 lines of therapy including a BTK inhibitor"},
+    // ── Maio 2026 (antes do dia 13) ──
+    {name:"Veppanu",    ing:"vepdegestrant",            date:"2026-05-01",sponsor:"Arvinas / Pfizer",route:"PO",moa:"First-in-class PROTAC (PROteolysis TArgeting Chimera); recruits E3 ligase CRBN to ERα, triggering its proteasomal degradation — eliminates receptor rather than merely blocking it",atc:"L02BA",desig:["BT","PR","FIC"],indication:"ESR1-mutated, ER+/HER2- advanced or metastatic breast cancer after ≥1 line of endocrine therapy"},
+    // ── Abril 2026 ──
+    {name:"Idvynso",    ing:"doravirine and islatravir",date:"2026-04-20",sponsor:"Merck",route:"PO",moa:"NNRTI (doravirine) + nucleoside reverse transcriptase translocation inhibitor (islatravir); dual mechanism complete HIV-1 regimen",atc:"J05AR",desig:["BT","PR"],indication:"HIV-1 infection in virologically-suppressed adults on a stable ARV regimen with no history of virologic failure"},
+    {name:"Foundayo",   ing:"orforglipron",             date:"2026-04-01",sponsor:"Eli Lilly",route:"PO",moa:"Non-peptide oral GLP-1 receptor agonist; first oral small-molecule GLP-1RA",atc:"A10BJ",desig:["FIC"],indication:"Obesity or overweight with ≥1 weight-related comorbidity in adults — long-term weight management"},
+    // ── Março 2026 ──
+    {name:"Awiqli",     ing:"insulin icodec-abae",      date:"2026-03-26",sponsor:"Novo Nordisk",route:"SC",moa:"Once-weekly basal insulin analogue with reversible albumin binding for prolonged half-life (~196 h)",atc:"A10AE",desig:[],indication:"Glycemic control in adults with type 2 diabetes mellitus"},
+    {name:"Lifyorli",   ing:"relacorilant",             date:"2026-03-25",sponsor:"Corcept Therapeutics",route:"PO",moa:"Selective glucocorticoid receptor modulator (SGRM); sensitizes ovarian cancer cells to nab-paclitaxel by blocking GR-mediated chemoresistance",atc:"L01XK",desig:["OD","PR"],indication:"Platinum-resistant epithelial ovarian, fallopian tube, or primary peritoneal cancer (1–3 prior regimens including bevacizumab)"},
+    {name:"Avlayah",    ing:"tividenofusp alfa-eknm",   date:"2026-03-24",sponsor:"Takeda",route:"IV",moa:"Recombinant iduronate-2-sulfatase (IDS) with CNS delivery technology; enzyme replacement therapy restoring GAG catabolism",atc:"A16AB",desig:["OD","BT","PR"],indication:"Hunter syndrome (Mucopolysaccharidosis type II, MPS II)"},
+    {name:"Icotyde",    ing:"icotrokinra",              date:"2026-03-17",sponsor:"Johnson & Johnson",route:"SC",moa:"IL-23 receptor peptide antagonist; blocks IL-23 signaling to reduce Th17-driven inflammation",atc:"L04AC",desig:["BT"],indication:"Moderate-to-severe plaque psoriasis in patients ≥12 years weighing ≥40 kg"},
+    {name:"Lynavoy",    ing:"linerixibat",              date:"2026-03-17",sponsor:"GSK",route:"PO",moa:"Ileal bile acid transporter (IBAT) inhibitor; reduces bile acid reabsorption and pruritus-mediating bile acid levels",atc:"A05AX",desig:["BT","PR"],indication:"Cholestatic pruritus associated with primary biliary cholangitis (PBC)"},
+    // ── Fevereiro 2026 ──
+    {name:"Yuviwel",    ing:"navepegritide",            date:"2026-02-27",sponsor:"Takeda",route:"SC",moa:"PEGylated C-type natriuretic peptide (CNP) analogue; stimulates endochondral bone growth via NPR-B receptor",atc:"H05AA",desig:["OD","BT","AA"],indication:"Achondroplasia — increase linear growth in pediatric patients ≥2 years with open epiphyses"},
+    {name:"Loargys",    ing:"pegzilarginase-nbln",      date:"2026-02-23",sponsor:"Aeglea BioTherapeutics",route:"IV",moa:"PEGylated recombinant human arginase 1; hydrolyzes plasma arginine, correcting hyperarginemia in ARG1 deficiency",atc:"A16AB",desig:["OD","BT","PR"],indication:"Hyperarginemia in Arginase 1 Deficiency in adults and pediatric patients ≥2 years"},
+    {name:"Bysanti",    ing:"milsaperidone",            date:"2026-02-20",sponsor:"Vanda Pharmaceuticals",route:"PO",moa:"D2/5-HT2A antagonist (iloperidone prodrug with improved tolerability profile)",atc:"N05AX",desig:[],indication:"Schizophrenia; manic or mixed episodes associated with bipolar I disorder"},
+    {name:"Adquey",     ing:"difamilast",               date:"2026-02-12",sponsor:"Otsuka",route:"TOP",moa:"Topical PDE4 inhibitor; reduces cAMP hydrolysis and downstream inflammatory cytokine production in skin",atc:"D11AH",desig:[],indication:"Mild to moderate atopic dermatitis"},
+    // ── Janeiro 2026 ──
+    {name:"Zycubo",     ing:"copper histidinate",       date:"2026-01-12",sponsor:"Eton Pharmaceuticals",route:"SC",moa:"Bioavailable copper complex; restores copper-dependent enzyme activity (dopamine β-hydroxylase, etc.) in Menkes disease",atc:"A12CB",desig:["OD","BT","PR"],indication:"Menkes disease"},
   ],
   2025:[
     {name:"Nereus",     ing:"tradipitant",         date:"2025-12-30",sponsor:"Vanda Pharmaceuticals",route:"PO",moa:"NK1 receptor antagonist",atc:"A04AD",desig:[],indication:"Vomiting associated with motion sickness"},
@@ -251,21 +271,13 @@ const RAW = {
     {name:"Loqtorzi",   ing:"toripalimab-tpzi",    date:"2023-10-27",sponsor:"Coherus/Junshi",route:"IV",moa:"Anti-PD-1 monoclonal antibody",atc:"L01FF",desig:["BT","PR"],indication:"Recurrent/metastatic nasopharyngeal carcinoma"},
     {name:"Rivfloza",   ing:"nedosiran",           date:"2023-10-02",sponsor:"Dicerna/Novo Nordisk",route:"SC",moa:"LDHA siRNA (RNA interference)",atc:"A16AX",desig:["OD","BT","PR"],indication:"Primary hyperoxaluria type 1 ≥9 years"},
     {name:"Augtyro",    ing:"repotrectinib",       date:"2023-11-15",sponsor:"Bristol-Myers Squibb",route:"PO",moa:"ROS1/NTRK inhibitor (CNS-penetrant, compact macrocycle)",atc:"L01EX",desig:["OD","BT","PR"],indication:"ROS1-positive NSCLC"},
-    {name:"Rezdiffra",  ing:"resmetirom",          date:"2023-03-14",sponsor:"Madrigal Pharmaceuticals",route:"PO",moa:"Thyroid hormone receptor β (THRβ) agonist",atc:"A05BA",desig:["FIC","BT","PR"],indication:"Non-cirrhotic MASH with liver fibrosis"},
-    {name:"Xolremdi",   ing:"mavorixafor",         date:"2023-04-26",sponsor:"X4 Pharmaceuticals",route:"PO",moa:"CXCR4 receptor antagonist",atc:"L04AX",desig:["OD","BT","PR","FIC"],indication:"WHIM syndrome"},
     {name:"Rezlidhia",  ing:"olutasidenib",        date:"2023-12-01",sponsor:"Rigel Pharmaceuticals",route:"PO",moa:"IDH1 mutant inhibitor",atc:"L01XK",desig:["OD","PR"],indication:"Relapsed/refractory AML with IDH1 mutation"},
-    {name:"Iqirvo",     ing:"elafibranor",         date:"2023-06-10",sponsor:"Ipsen",route:"PO",moa:"PPARα/δ agonist",atc:"A05AA",desig:["OD","BT","PR"],indication:"Primary biliary cholangitis"},
-    {name:"Duvyzat",    ing:"givinostat",          date:"2023-03-22",sponsor:"Italfarmaco",route:"PO",moa:"Pan-HDAC inhibitor",atc:"L01XH",desig:["OD","BT","PR"],indication:"Duchenne muscular dystrophy ≥6 years"},
-    {name:"Camzyos",    ing:"mavacamten",          date:"2023-04-28",sponsor:"Bristol-Myers Squibb",route:"PO",moa:"Cardiac myosin inhibitor",atc:"C01BX",desig:["FIC","BT","PR"],indication:"Obstructive hypertrophic cardiomyopathy"},
-    {name:"Filsuvez",   ing:"birch triterpenes",   date:"2023-12-18",sponsor:"Amryt Pharma",route:"TOP",moa:"Triterpene wound healing agent (mechanism unclear)",atc:"D03AX",desig:["OD","BT","PR"],indication:"Epidermolysis bullosa wound treatment ≥6 months"},
     {name:"Niktimvo",   ing:"axatilimab-csfr",     date:"2023-08-29",sponsor:"Syndax",route:"IV",moa:"Anti-CSF-1R monoclonal antibody",atc:"L04AA",desig:["OD","BT","PR"],indication:"Chronic graft-versus-host disease (≥2 prior lines)"},
-    {name:"Alhemo",     ing:"concizumab-mtci",     date:"2023-05-09",sponsor:"Novo Nordisk",route:"SC",moa:"Anti-TFPI monoclonal antibody",atc:"B02BD",desig:["OD","BT","PR"],indication:"Hemophilia A or B with inhibitors"},
-    {name:"Litfulo (alopecia areata)",ing:"ritlecitinib",date:"2023-06-23",sponsor:"Pfizer",route:"PO",moa:"JAK3/TEC kinase inhibitor",atc:"L04AF",desig:["BT","PR"],indication:"Severe alopecia areata ≥12 years"},
-    {name:"Vanflyta (FLT3 AML)",ing:"quizartinib", date:"2023-07-20",sponsor:"Daiichi Sankyo",route:"PO",moa:"FLT3 ITD kinase inhibitor",atc:"L01EX",desig:["BT","PR"],indication:"FLT3-ITD+ newly diagnosed AML"},
-    {name:"Wainua",     ing:"eplontersen",         date:"2023-12-21",sponsor:"AstraZeneca/Ionis",route:"SC",moa:"Antisense oligonucleotide targeting TTR mRNA",atc:"M09AX",desig:["OD","BT","PR"],indication:"Polyneuropathy of hereditary transthyretin-mediated amyloidosis"},
     {name:"Velsipity",  ing:"etrasimod",           date:"2023-10-12",sponsor:"Pfizer/Arena",route:"PO",moa:"Selective S1P1/4/5 receptor modulator",atc:"L04AJ",desig:["BT","PR"],indication:"Moderately to severely active ulcerative colitis ≥16 years"},
     {name:"Ogsiveo",    ing:"nirogacestat",        date:"2023-11-09",sponsor:"SpringWorks",route:"PO",moa:"γ-secretase inhibitor",atc:"L01XK",desig:["OD","BT","PR","FIC"],indication:"Progressing desmoid tumors"},
-    {name:"Mirikizumab (Crohn's)",ing:"mirikizumab-mrkz",date:"2023-10-26",sponsor:"Eli Lilly",route:"IV/SC",moa:"Anti-IL-23p19 monoclonal antibody",atc:"L04AC",desig:["BT"],indication:"Moderately to severely active Crohn's disease"},
+    {name:"Wainua",     ing:"eplontersen",         date:"2023-12-21",sponsor:"AstraZeneca/Ionis",route:"SC",moa:"Antisense oligonucleotide targeting TTR mRNA",atc:"M09AX",desig:["OD","BT","PR"],indication:"Polyneuropathy of hereditary transthyretin-mediated amyloidosis"},
+    {name:"Filsuvez",   ing:"birch triterpenes",   date:"2023-12-18",sponsor:"Amryt Pharma",route:"TOP",moa:"Triterpene wound healing agent (mechanism unclear)",atc:"D03AX",desig:["OD","BT","PR"],indication:"Epidermolysis bullosa wound treatment ≥6 months"},
+    {name:"Camzyos",    ing:"mavacamten",          date:"2023-04-28",sponsor:"Bristol-Myers Squibb",route:"PO",moa:"Cardiac myosin inhibitor",atc:"C01BX",desig:["FIC","BT","PR"],indication:"Obstructive hypertrophic cardiomyopathy"},
   ],
   2022:[
     {name:"Quviviq",    ing:"daridorexant",        date:"2022-01-07",sponsor:"Idorsia",route:"PO",moa:"Dual orexin receptor antagonist (DORA)",atc:"N05CF",desig:["FIC"],indication:"Insomnia"},
@@ -284,7 +296,6 @@ const RAW = {
     {name:"Vtama",      ing:"tapinarof",           date:"2022-05-23",sponsor:"Dermavant",route:"TOP",moa:"AhR agonist (topical)",atc:"D05AX",desig:["FIC","BT","PR"],indication:"Plaque psoriasis ≥18 years"},
     {name:"Voquezna",   ing:"vonoprazan, amoxicillin",date:"2022-05-03",sponsor:"Phathom Pharmaceuticals",route:"PO",moa:"Potassium-competitive acid blocker (P-CAB) + antibiotic",atc:"J01FA",desig:["FIC","BT","PR"],indication:"H. pylori infection eradication"},
     {name:"Amvuttra",   ing:"vutrisiran",          date:"2022-06-13",sponsor:"Alnylam",route:"SC",moa:"TTR-targeting siRNA (RNA interference)",atc:"M09AX",desig:["OD","BT","PR"],indication:"Polyneuropathy of hereditary transthyretin-mediated amyloidosis"},
-    {name:"Elfabrio",   ing:"pegunigalsidase alfa-iwxj",date:"2022-05-09",sponsor:"Protalix/Chiesi",route:"IV",moa:"Pegylated recombinant alpha-galactosidase A (ERT)",atc:"A16AB",desig:["OD","BT","PR"],indication:"Fabry disease"},
     {name:"Xenpozyme",  ing:"olipudase alfa-rpcp", date:"2022-08-31",sponsor:"Sanofi",route:"IV",moa:"Recombinant acid sphingomyelinase (ERT)",atc:"A16AB",desig:["OD","BT","PR","FIC"],indication:"Non-CNS acid sphingomyelinase deficiency"},
     {name:"Ngenla",     ing:"somatrogon-ghla",     date:"2022-08-25",sponsor:"Pfizer/OPKO",route:"SC",moa:"Weekly recombinant human growth hormone",atc:"H01AC",desig:["BT","PR"],indication:"Pediatric growth hormone deficiency"},
     {name:"Daxxify",    ing:"daxibotulinumtoxinA-lanm",date:"2022-09-07",sponsor:"Revance Therapeutics",route:"IM",moa:"Clostridium botulinum toxin type A (RHOCC peptide formulation)",atc:"M03AX",desig:["BT","PR"],indication:"Moderate-to-severe glabellar lines"},
@@ -314,8 +325,8 @@ const RAW = {
 // Biologic detection
 // ─────────────────────────────────────────────────────────────────────────────
 function isBiologic(ing) {
-  return /-(mab|cept|alfa|beta|gamma|deruxtecan|vedotin|wuug|szsi|hrii|hncq|tllv|kcqx|cfor|aahu|bcmm|tgvs|mrkz|irmb|lbkz|trbw|dlnk|nbln|ipdl|zbco|clzb|mtci|ulaa|eknm|gcpt|liga|dpyl|jome|actl)\b/i.test(ing) ||
-    /\b(narsoplimab|sibeprenlimab|depemokimab|icotrokinra|navepegritide|pegzilarginase|tividenofusp|concizumab|linvoseltamab|garadacimab|clesrovimab|telisotuzumab|nipocalimab|penpulimab|datopotamab|pembrolizumab|plozasiran|fitusiran|vutrisiran|nedosiran|olezarsen|tofersen|insulin icodec)\b/i.test(ing);
+  return /-(mab|cept|alfa|beta|gamma|deruxtecan|vedotin|wuug|szsi|hrii|hncq|tllv|kcqx|cfor|aahu|bcmm|tgvs|mrkz|irmb|lbkz|trbw|dlnk|nbln|ipdl|zbco|clzb|mtci|ulaa|eknm|gcpt|liga|dpyl|jome|actl|gmod|pvzy)\b/i.test(ing) ||
+    /\b(narsoplimab|sibeprenlimab|depemokimab|icotrokinra|navepegritide|pegzilarginase|tividenofusp|concizumab|linvoseltamab|garadacimab|clesrovimab|telisotuzumab|nipocalimab|penpulimab|datopotamab|pembrolizumab|plozasiran|fitusiran|vutrisiran|nedosiran|olezarsen|tofersen|insulin icodec|bulevirtide|pivekimab)\b/i.test(ing);
 }
 
 function processData(raw) {
@@ -447,7 +458,7 @@ function DrugCard({ drug, onClick }) {
   );
 }
 
-function Tooltip({ text, children }) {
+function PropTooltip({ text, children }) {
   const [show, setShow] = useState(false);
   return (
     <span style={{position:"relative",display:"inline-flex",alignItems:"center",gap:3}}>
@@ -498,7 +509,7 @@ function Prop({ label, value }) {
     <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",
       padding:"5px 0",borderBottom:`1px solid ${C.bdr}`,fontSize:12}}>
       <span style={{color:C.mut,fontWeight:500}}>
-        {tip ? <Tooltip text={tip}>{label}</Tooltip> : label}
+        {tip ? <PropTooltip text={tip}>{label}</PropTooltip> : label}
       </span>
       <span style={{color:C.txt,fontFamily:"monospace",fontWeight:600}}>{value}</span>
     </div>
@@ -527,7 +538,6 @@ function Modal({ drug, onClose }) {
           color:C.mut,width:32,height:32,cursor:"pointer",fontSize:16,lineHeight:1,
           display:"flex",alignItems:"center",justifyContent:"center"}}>×</button>
 
-        {/* Header */}
         <div style={{marginBottom:20}}>
           <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center",marginBottom:10}}>
             <TypeBadge bio={bio}/>
@@ -544,7 +554,6 @@ function Modal({ drug, onClose }) {
           </div>
         </div>
 
-        {/* MOA */}
         <div style={{background:C.smBg,borderRadius:8,padding:"10px 14px",marginBottom:16,
           borderLeft:`3px solid ${C.sm}`}}>
           <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.08em",
@@ -552,14 +561,12 @@ function Modal({ drug, onClose }) {
           <div style={{fontSize:13,color:C.txt,fontWeight:600}}>{drug.moa}</div>
         </div>
 
-        {/* Indication */}
         <div style={{marginBottom:18}}>
           <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.08em",
             color:C.mut,textTransform:"uppercase",marginBottom:6}}>Clinical Indication</div>
           <div style={{fontSize:13,color:C.txt,lineHeight:1.65}}>{drug.indication}</div>
         </div>
 
-        {/* Structure + Physicochemical */}
         {!bio && pc && (
           <div style={{display:"flex",gap:20,marginBottom:18,flexWrap:"wrap"}}>
             <div>
@@ -602,7 +609,6 @@ function Modal({ drug, onClose }) {
           </div>
         )}
 
-        {/* SMILES */}
         {!bio && pc?.smiles && (
           <div style={{marginBottom:16}}>
             <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.08em",
@@ -626,9 +632,334 @@ function Modal({ drug, onClose }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// DASHBOARD ANALYTICS
+// ─────────────────────────────────────────────────────────────────────────────
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+         ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from "recharts";
+
+const ALL_DRUGS = YEARS.flatMap(y => DB[y] || []);
+
+const CHART_COLORS = {
+  sm:   C.sm,
+  bio:  C.bio,
+  fic:  C.fic,
+  bt:   C.bt,
+  od:   C.orp,
+  pr:   C.acc,
+  comp: C.ok,
+  viol: "#e5b8b8",
+};
+const PIE_COLORS = ["#0066cc","#00875a","#7b2fa0","#b35c00","#c0392b",
+                    "#2980b9","#16a085","#8e44ad","#e67e22","#e74c3c",
+                    "#1abc9c","#3498db","#9b59b6"];
+
+const ChartTooltip = ({ active, payload, label }) => {
+  if (!active || !payload?.length) return null;
+  return (
+    <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:8,
+      padding:"10px 14px",boxShadow:C.shadow,fontSize:12}}>
+      <div style={{fontWeight:700,color:C.txt,marginBottom:6}}>{label}</div>
+      {payload.map((p,i) => (
+        <div key={i} style={{color:p.color,marginBottom:2}}>
+          {p.name}: <strong>{p.value}</strong>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+function SectionTitle({ children }) {
+  return (
+    <div style={{fontSize:15,fontWeight:700,color:C.txt,marginBottom:16,
+      paddingBottom:8,borderBottom:`1px solid ${C.bdr}`}}>
+      {children}
+    </div>
+  );
+}
+
+function StatCard({ label, value, sub, color }) {
+  return (
+    <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,
+      padding:"18px 20px",boxShadow:C.shadow,flex:1,minWidth:140}}>
+      <div style={{fontSize:32,fontWeight:800,color:color||C.acc,
+        fontFamily:"Georgia,serif",lineHeight:1}}>{value}</div>
+      <div style={{fontSize:13,fontWeight:600,color:C.txt,marginTop:6}}>{label}</div>
+      {sub && <div style={{fontSize:11,color:C.mut,marginTop:2}}>{sub}</div>}
+    </div>
+  );
+}
+
+function computeYearData(drugs) {
+  const smWithMW = drugs.filter(d => d.pc?.mw);
+
+  const byYear = YEARS.map(y => {
+    const yd = DB[y]||[];
+    return { year:String(y),
+      "Small Molecule": yd.filter(d=>d.type==="small_molecule").length,
+      "Biologic":       yd.filter(d=>d.type==="biologic").length,
+      total: yd.length };
+  }).reverse();
+
+  const desByYear = YEARS.map(y => {
+    const yd = DB[y]||[];
+    return { year:String(y),
+      "First-in-Class": yd.filter(d=>d.desig?.includes("FIC")).length,
+      "Breakthrough":   yd.filter(d=>d.desig?.includes("BT")).length,
+      "Orphan Drug":    yd.filter(d=>d.desig?.includes("OD")).length,
+      "Priority Review":yd.filter(d=>d.desig?.includes("PR")).length };
+  }).reverse();
+
+  const sponsorCount = {};
+  drugs.forEach(d=>{ if(d.sponsor) sponsorCount[d.sponsor]=(sponsorCount[d.sponsor]||0)+1; });
+  const topSponsors = Object.entries(sponsorCount).sort((a,b)=>b[1]-a[1]).slice(0,12)
+    .map(([name,count])=>({name,count}));
+
+  const atcGroups = {A:"Alimentary",B:"Blood",C:"Cardiovascular",D:"Dermatology",
+    G:"Genito-urinary",H:"Hormones",J:"Anti-infectives",L:"Antineoplastic",
+    M:"Musculoskeletal",N:"Nervous System",R:"Respiratory",S:"Sensory Organs",V:"Various"};
+  const atcCount = {};
+  drugs.forEach(d=>{ if(!d.atc) return; const l=atcGroups[d.atc[0].toUpperCase()]||"Other"; atcCount[l]=(atcCount[l]||0)+1; });
+  const atcData = Object.entries(atcCount).sort((a,b)=>b[1]-a[1]).map(([name,value])=>({name,value}));
+
+  const mwBuckets=[{range:"<200",min:0,max:200},{range:"200-300",min:200,max:300},
+    {range:"300-400",min:300,max:400},{range:"400-500",min:400,max:500},
+    {range:"500-600",min:500,max:600},{range:"600-800",min:600,max:800},{range:">800",min:800,max:99999}];
+  const mwDist = mwBuckets.map(b=>({range:b.range,
+    count:smWithMW.filter(d=>d.pc.mw>=b.min&&d.pc.mw<b.max).length}));
+
+  const routeCount={};
+  drugs.forEach(d=>{ const r=d.route||"Unknown"; routeCount[r]=(routeCount[r]||0)+1; });
+  const routeData = Object.entries(routeCount).sort((a,b)=>b[1]-a[1])
+    .map(([name,value])=>({name:ROUTE_LABEL[name]||name,value}));
+
+  const ro5ByYear = YEARS.map(y=>{
+    const sms=(DB[y]||[]).filter(d=>d.type==="small_molecule"&&d.pc?.mw);
+    const compliant=sms.filter(d=>d.pc.mw<=500&&d.pc.logp<=5&&d.pc.hbd<=5&&d.pc.hba<=10).length;
+    return {year:String(y),"Compliant":compliant,"Violation":sms.length-compliant,
+      pct:sms.length?Math.round(compliant/sms.length*100):0};
+  }).reverse();
+
+  const desPie=[
+    {name:"First-in-Class",value:drugs.filter(d=>d.desig?.includes("FIC")).length,color:C.fic},
+    {name:"Breakthrough",  value:drugs.filter(d=>d.desig?.includes("BT")).length, color:C.bt},
+    {name:"Orphan Drug",   value:drugs.filter(d=>d.desig?.includes("OD")).length, color:C.orp},
+    {name:"Priority Review",value:drugs.filter(d=>d.desig?.includes("PR")).length,color:C.acc},
+  ].filter(d=>d.value>0);
+
+  return {byYear,desByYear,topSponsors,atcData,mwDist,routeData,ro5ByYear,desPie};
+}
+
+function Dashboard() {
+  const [selYear, setSelYear] = useState("all");
+  const isAll = selYear==="all";
+  const drugs = isAll ? ALL_DRUGS : (DB[parseInt(selYear)]||[]);
+  const D     = computeYearData(drugs);
+
+  const total    = drugs.length;
+  const totalSM  = drugs.filter(d=>d.type==="small_molecule").length;
+  const totalBio = drugs.filter(d=>d.type==="biologic").length;
+  const totalFIC = drugs.filter(d=>d.desig?.includes("FIC")).length;
+  const totalBT  = drugs.filter(d=>d.desig?.includes("BT")).length;
+  const totalOD  = drugs.filter(d=>d.desig?.includes("OD")).length;
+
+  return (
+    <div style={{padding:"24px",maxWidth:1200,margin:"0 auto"}}>
+      <div style={{display:"flex",gap:6,marginBottom:24,flexWrap:"wrap",alignItems:"center"}}>
+        <span style={{fontSize:12,color:C.mut,fontWeight:600,marginRight:4}}>View:</span>
+        {["all",...YEARS.map(String)].map(y=>{
+          const act=selYear===y;
+          return (
+            <button key={y} onClick={()=>setSelYear(y)} style={{
+              background:act?C.acc:C.surf,border:`1px solid ${act?C.acc:C.bdr}`,
+              color:act?"#fff":C.mut,borderRadius:6,padding:"5px 14px",
+              fontSize:12,fontWeight:act?700:400,cursor:"pointer",
+              fontFamily:"inherit",transition:"all 0.12s",
+              boxShadow:act?`0 2px 8px ${C.acc}44`:C.shadow}}>
+              {y==="all"?"All Years":y}
+            </button>
+          );
+        })}
+      </div>
+
+      <div style={{display:"flex",gap:12,flexWrap:"wrap",marginBottom:28}}>
+        <StatCard label="Total Approvals"  value={total}    sub={isAll?"2022-2026":selYear}           color={C.acc}/>
+        <StatCard label="Small Molecules"  value={totalSM}  sub={`${total?Math.round(totalSM/total*100):0}% of total`}  color={C.sm}/>
+        <StatCard label="Biologics"        value={totalBio} sub={`${total?Math.round(totalBio/total*100):0}% of total`} color={C.bio}/>
+        <StatCard label="First-in-Class"   value={totalFIC} sub={`${total?Math.round(totalFIC/total*100):0}% of total`} color={C.fic}/>
+        <StatCard label="Breakthrough"     value={totalBT}  sub={`${total?Math.round(totalBT/total*100):0}% of total`}  color={C.bt}/>
+        <StatCard label="Orphan Drug"      value={totalOD}  sub={`${total?Math.round(totalOD/total*100):0}% of total`}  color={C.orp}/>
+      </div>
+
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20,marginBottom:24}}>
+        <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
+          {isAll ? (
+            <>
+              <SectionTitle>Approvals by Year</SectionTitle>
+              <ResponsiveContainer width="100%" height={220}>
+                <BarChart data={D.byYear} barCategoryGap="30%">
+                  <CartesianGrid strokeDasharray="3 3" stroke={C.bdr}/>
+                  <XAxis dataKey="year" tick={{fontSize:12,fill:C.mut}} axisLine={false} tickLine={false}/>
+                  <YAxis tick={{fontSize:11,fill:C.mut}} axisLine={false} tickLine={false}/>
+                  <Tooltip content={<ChartTooltip/>}/>
+                  <Legend wrapperStyle={{fontSize:11}}/>
+                  <Bar dataKey="Small Molecule" fill={C.sm}  radius={[4,4,0,0]}/>
+                  <Bar dataKey="Biologic"       fill={C.bio} radius={[4,4,0,0]}/>
+                </BarChart>
+              </ResponsiveContainer>
+            </>
+          ) : (
+            <>
+              <SectionTitle>Drug Type Split — {selYear}</SectionTitle>
+              <ResponsiveContainer width="100%" height={220}>
+                <PieChart>
+                  <Pie data={[
+                    {name:"Small Molecule",value:totalSM,color:C.sm},
+                    {name:"Biologic",value:totalBio,color:C.bio},
+                  ]} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={90}
+                    label={({name,value})=>`${name}: ${value}`}>
+                    {[C.sm,C.bio].map((col,i)=><Cell key={i} fill={col}/>)}
+                  </Pie>
+                  <Tooltip contentStyle={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:8,fontSize:12}}/>
+                </PieChart>
+              </ResponsiveContainer>
+            </>
+          )}
+        </div>
+
+        <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
+          {isAll ? (
+            <>
+              <SectionTitle>Regulatory Designations by Year</SectionTitle>
+              <ResponsiveContainer width="100%" height={220}>
+                <BarChart data={D.desByYear} barCategoryGap="30%">
+                  <CartesianGrid strokeDasharray="3 3" stroke={C.bdr}/>
+                  <XAxis dataKey="year" tick={{fontSize:12,fill:C.mut}} axisLine={false} tickLine={false}/>
+                  <YAxis tick={{fontSize:11,fill:C.mut}} axisLine={false} tickLine={false}/>
+                  <Tooltip content={<ChartTooltip/>}/>
+                  <Legend wrapperStyle={{fontSize:11}}/>
+                  <Bar dataKey="Breakthrough"    fill={C.bt}  radius={[3,3,0,0]}/>
+                  <Bar dataKey="Orphan Drug"     fill={C.orp} radius={[3,3,0,0]}/>
+                  <Bar dataKey="Priority Review" fill={C.acc} radius={[3,3,0,0]}/>
+                  <Bar dataKey="First-in-Class"  fill={C.fic} radius={[3,3,0,0]}/>
+                </BarChart>
+              </ResponsiveContainer>
+            </>
+          ) : (
+            <>
+              <SectionTitle>Regulatory Designations — {selYear}</SectionTitle>
+              <ResponsiveContainer width="100%" height={220}>
+                <PieChart>
+                  <Pie data={D.desPie} dataKey="value" nameKey="name"
+                    cx="50%" cy="50%" outerRadius={90}
+                    label={({name,value})=>`${name}: ${value}`}>
+                    {D.desPie.map((d,i)=><Cell key={i} fill={d.color}/>)}
+                  </Pie>
+                  <Tooltip contentStyle={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:8,fontSize:12}}/>
+                </PieChart>
+              </ResponsiveContainer>
+            </>
+          )}
+        </div>
+      </div>
+
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20,marginBottom:24}}>
+        <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
+          <SectionTitle>Top Sponsors{isAll?" (2022-2026)":" — "+selYear}</SectionTitle>
+          <ResponsiveContainer width="100%" height={280}>
+            <BarChart data={D.topSponsors} layout="vertical" barCategoryGap="20%">
+              <CartesianGrid strokeDasharray="3 3" stroke={C.bdr} horizontal={false}/>
+              <XAxis type="number" tick={{fontSize:11,fill:C.mut}} axisLine={false} tickLine={false}/>
+              <YAxis type="category" dataKey="name" width={130} tick={{fontSize:10,fill:C.mut}} axisLine={false} tickLine={false}/>
+              <Tooltip content={<ChartTooltip/>}/>
+              <Bar dataKey="count" fill={C.acc} radius={[0,4,4,0]} name="Approvals"/>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
+          <SectionTitle>Therapeutic Areas (ATC){isAll?" (2022-2026)":" — "+selYear}</SectionTitle>
+          <ResponsiveContainer width="100%" height={280}>
+            <PieChart>
+              <Pie data={D.atcData} dataKey="value" nameKey="name"
+                cx="50%" cy="50%" outerRadius={100}
+                label={({name,percent})=>`${name} ${(percent*100).toFixed(0)}%`}
+                labelLine={false} style={{fontSize:9}}>
+                {D.atcData.map((_,i)=><Cell key={i} fill={PIE_COLORS[i%PIE_COLORS.length]}/>)}
+              </Pie>
+              <Tooltip contentStyle={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:8,fontSize:12}}/>
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20,marginBottom:24}}>
+        <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
+          <SectionTitle>Molecular Weight Distribution{isAll?"":" — "+selYear}</SectionTitle>
+          <ResponsiveContainer width="100%" height={200}>
+            <BarChart data={D.mwDist} barCategoryGap="20%">
+              <CartesianGrid strokeDasharray="3 3" stroke={C.bdr}/>
+              <XAxis dataKey="range" tick={{fontSize:10,fill:C.mut}} axisLine={false} tickLine={false}/>
+              <YAxis tick={{fontSize:11,fill:C.mut}} axisLine={false} tickLine={false}/>
+              <Tooltip content={<ChartTooltip/>}/>
+              <Bar dataKey="count" fill={C.sm} radius={[4,4,0,0]} name="Molecules"/>
+            </BarChart>
+          </ResponsiveContainer>
+          <div style={{fontSize:11,color:C.mut,marginTop:8,textAlign:"center"}}>Lipinski MW threshold: 500 Da</div>
+        </div>
+
+        <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,padding:"20px",boxShadow:C.shadow}}>
+          <SectionTitle>Lipinski Ro5 Compliance{isAll?" by Year":" — "+selYear}</SectionTitle>
+          <ResponsiveContainer width="100%" height={200}>
+            {isAll ? (
+              <BarChart data={D.ro5ByYear} barCategoryGap="30%">
+                <CartesianGrid strokeDasharray="3 3" stroke={C.bdr}/>
+                <XAxis dataKey="year" tick={{fontSize:12,fill:C.mut}} axisLine={false} tickLine={false}/>
+                <YAxis tick={{fontSize:11,fill:C.mut}} axisLine={false} tickLine={false}/>
+                <Tooltip content={<ChartTooltip/>}/>
+                <Legend wrapperStyle={{fontSize:11}}/>
+                <Bar dataKey="Compliant" stackId="a" fill={C.ok}             radius={[0,0,0,0]}/>
+                <Bar dataKey="Violation" stackId="a" fill={CHART_COLORS.viol} radius={[4,4,0,0]}/>
+              </BarChart>
+            ) : (
+              <PieChart>
+                <Pie data={[
+                  {name:"Compliant",value:D.ro5ByYear.find(r=>r.year===selYear)?.Compliant||0,color:C.ok},
+                  {name:"Violation",value:D.ro5ByYear.find(r=>r.year===selYear)?.Violation||0,color:CHART_COLORS.viol},
+                ].filter(d=>d.value>0)} dataKey="value" nameKey="name"
+                  cx="50%" cy="50%" outerRadius={80}
+                  label={({name,value,percent})=>`${name}: ${value} (${(percent*100).toFixed(0)}%)`}>
+                  {[C.ok,CHART_COLORS.viol].map((col,i)=><Cell key={i} fill={col}/>)}
+                </Pie>
+                <Tooltip contentStyle={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:8,fontSize:12}}/>
+              </PieChart>
+            )}
+          </ResponsiveContainer>
+          <div style={{fontSize:11,color:C.mut,marginTop:8,textAlign:"center"}}>Small molecules with available data only</div>
+        </div>
+      </div>
+
+      <div style={{background:C.surf,border:`1px solid ${C.bdr}`,borderRadius:10,
+        padding:"20px",boxShadow:C.shadow,marginBottom:24}}>
+        <SectionTitle>Route of Administration{isAll?" (2022-2026)":" — "+selYear}</SectionTitle>
+        <ResponsiveContainer width="100%" height={180}>
+          <BarChart data={D.routeData} barCategoryGap="30%">
+            <CartesianGrid strokeDasharray="3 3" stroke={C.bdr}/>
+            <XAxis dataKey="name" tick={{fontSize:11,fill:C.mut}} axisLine={false} tickLine={false}/>
+            <YAxis tick={{fontSize:11,fill:C.mut}} axisLine={false} tickLine={false}/>
+            <Tooltip content={<ChartTooltip/>}/>
+            <Bar dataKey="value" fill={C.orp} radius={[4,4,0,0]} name="Approvals"/>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // MAIN APP
 // ─────────────────────────────────────────────────────────────────────────────
 export default function FDAExplorer() {
+  const [page,   setPage]   = useState("approvals");
   const [year,   setYear]   = useState(2026);
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
@@ -670,7 +1001,6 @@ export default function FDAExplorer() {
         button:focus{outline:none}
       `}</style>
 
-      {/* Header */}
       <header style={{background:C.surf,borderBottom:`1px solid ${C.bdr}`,
         padding:"16px 24px",display:"flex",alignItems:"center",gap:12,flexWrap:"wrap",
         boxShadow:"0 1px 4px #0f162308"}}>
@@ -681,79 +1011,100 @@ export default function FDAExplorer() {
             Novel NMEs &amp; Biologics · CDER · 2022–2026
           </div>
         </div>
-        <input placeholder="Search name, MOA, sponsor, indication…"
-          value={search} onChange={e=>setSearch(e.target.value)}
-          style={{background:C.bg,border:`1px solid ${C.bdr}`,borderRadius:8,
-            padding:"7px 12px",color:C.txt,fontSize:12,fontFamily:"inherit",
-            width:230,outline:"none",boxShadow:"inset 0 1px 3px #0f162308"}}/>
+        {page==="approvals" && (
+          <input placeholder="Search name, MOA, sponsor, indication…"
+            value={search} onChange={e=>setSearch(e.target.value)}
+            style={{background:C.bg,border:`1px solid ${C.bdr}`,borderRadius:8,
+              padding:"7px 12px",color:C.txt,fontSize:12,fontFamily:"inherit",
+              width:230,outline:"none",boxShadow:"inset 0 1px 3px #0f162308"}}/>
+        )}
       </header>
 
-      {/* Year tabs */}
-      <div style={{background:C.surf,display:"flex",borderBottom:`1px solid ${C.bdr}`,
-        padding:"0 24px",overflowX:"auto",gap:0}}>
-        {YEARS.map(y=>{
-          const act=y===year;
-          const cnt=(DB[y]||[]).length;
+      <div style={{background:C.surf,borderBottom:`1px solid ${C.bdr}`,
+        padding:"0 24px",display:"flex",gap:0}}>
+        {[["approvals","Approvals"],["dashboard","Dashboard"]].map(([key,label])=>{
+          const act = page===key;
           return (
-            <button key={y} onClick={()=>{setYear(y);setFilter("all");setSearch("");}} style={{
+            <button key={key} onClick={()=>setPage(key)} style={{
               background:"none",border:"none",
               borderBottom:act?`2px solid ${C.acc}`:"2px solid transparent",
-              padding:"13px 18px",cursor:"pointer",
-              color:act?C.acc:C.mut,fontSize:13,fontWeight:act?700:400,
-              fontFamily:"inherit",display:"flex",alignItems:"center",gap:7,whiteSpace:"nowrap"}}>
-              {y}
-              <span style={{background:act?C.accBg:C.surfAlt,
-                color:act?C.acc:C.dim,
-                borderRadius:10,padding:"1px 7px",fontSize:10,fontWeight:600}}>{cnt}</span>
+              padding:"13px 20px",cursor:"pointer",
+              color:act?C.acc:C.mut,fontSize:13,fontWeight:act?700:500,
+              fontFamily:"inherit",letterSpacing:"0.01em",transition:"color 0.12s"}}>
+              {label}
             </button>
           );
         })}
       </div>
 
-      {/* Filters */}
-      <div style={{background:C.surf,padding:"10px 24px",display:"flex",gap:6,
-        flexWrap:"wrap",borderBottom:`1px solid ${C.bdr}`,alignItems:"center"}}>
-        {[
-          ["all",          `All (${drugs.length})`],
-          ["small_molecule",`Small Mol. (${smN})`],
-          ["biologic",     `Biologic (${bioN})`],
-          ["fic",          "First-in-Class"],
-          ["bt",           "Breakthrough"],
-          ["od",           "Orphan Drug"],
-        ].map(([k,l])=>(
-          <button key={k} onClick={()=>setFilter(k)} style={{
-            background:filter===k?C.acc:C.bg,
-            border:`1px solid ${filter===k?C.acc:C.bdr}`,
-            color:filter===k?"#fff":C.mut,
-            borderRadius:6,padding:"4px 12px",fontSize:11,
-            fontWeight:filter===k?600:400,
-            cursor:"pointer",fontFamily:"inherit",transition:"all 0.12s"}}>
-            {l}
-          </button>
-        ))}
-        {search && (
-          <span style={{fontSize:11,color:C.mut,marginLeft:4}}>
-            {visible.length} result{visible.length!==1?"s":""}
-          </span>
-        )}
-      </div>
+      {page==="approvals" && <>
+        <div style={{background:C.surf,display:"flex",borderBottom:`1px solid ${C.bdr}`,
+          padding:"0 24px",overflowX:"auto",gap:0}}>
+          {YEARS.map(y=>{
+            const act=y===year;
+            const cnt=(DB[y]||[]).length;
+            return (
+              <button key={y} onClick={()=>{setYear(y);setFilter("all");setSearch("");}} style={{
+                background:"none",border:"none",
+                borderBottom:act?`2px solid ${C.acc}`:"2px solid transparent",
+                padding:"12px 18px",cursor:"pointer",
+                color:act?C.acc:C.mut,fontSize:13,fontWeight:act?700:400,
+                fontFamily:"inherit",display:"flex",alignItems:"center",gap:7,whiteSpace:"nowrap"}}>
+                {y}
+                <span style={{background:act?C.accBg:C.surfAlt,
+                  color:act?C.acc:C.dim,
+                  borderRadius:10,padding:"1px 7px",fontSize:10,fontWeight:600}}>{cnt}</span>
+              </button>
+            );
+          })}
+        </div>
 
-      {/* Grid */}
-      <main style={{padding:"20px 24px"}}>
-        {visible.length===0 ? (
-          <div style={{textAlign:"center",padding:"60px 0",color:C.dim}}>
-            No results found.
-          </div>
-        ) : (
-          <div style={{display:"grid",
-            gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:14}}>
-            {visible.map(d=><DrugCard key={d.id} drug={d} onClick={()=>setSel(d)}/>)}
-          </div>
-        )}
-      </main>
+        <div style={{background:C.surf,padding:"10px 24px",display:"flex",gap:6,
+          flexWrap:"wrap",borderBottom:`1px solid ${C.bdr}`,alignItems:"center"}}>
+          {[
+            ["all",          `All (${drugs.length})`],
+            ["small_molecule",`Small Mol. (${smN})`],
+            ["biologic",     `Biologic (${bioN})`],
+            ["fic",          "First-in-Class"],
+            ["bt",           "Breakthrough"],
+            ["od",           "Orphan Drug"],
+          ].map(([k,l])=>(
+            <button key={k} onClick={()=>setFilter(k)} style={{
+              background:filter===k?C.acc:C.bg,
+              border:`1px solid ${filter===k?C.acc:C.bdr}`,
+              color:filter===k?"#fff":C.mut,
+              borderRadius:6,padding:"4px 12px",fontSize:11,
+              fontWeight:filter===k?600:400,
+              cursor:"pointer",fontFamily:"inherit",transition:"all 0.12s"}}>
+              {l}
+            </button>
+          ))}
+          {search && (
+            <span style={{fontSize:11,color:C.mut,marginLeft:4}}>
+              {visible.length} result{visible.length!==1?"s":""}
+            </span>
+          )}
+        </div>
+
+        <main style={{padding:"20px 24px"}}>
+          {visible.length===0 ? (
+            <div style={{textAlign:"center",padding:"60px 0",color:C.dim}}>
+              No results found.
+            </div>
+          ) : (
+            <div style={{display:"grid",
+              gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:14}}>
+              {visible.map(d=><DrugCard key={d.id} drug={d} onClick={()=>setSel(d)}/>)}
+            </div>
+          )}
+        </main>
+
+        {sel && <Modal drug={sel} onClose={()=>setSel(null)}/>}
+      </>}
 
       {sel && <Modal drug={sel} onClose={()=>setSel(null)}/>}
       <Analytics />
+      {page==="dashboard" && <Dashboard/>}
     </div>
   );
 }
