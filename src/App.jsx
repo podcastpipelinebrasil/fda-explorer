@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // DESIGN TOKENS — Branco Científico
@@ -390,7 +391,7 @@ function StructureCanvas({ smiles }) {
     style={{borderRadius:8,border:`1px solid ${C.bdr}`,display:"block"}}/>;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// ─────���───────────────────────────────────────────────────────────────────────
 // UI COMPONENTS
 // ─────────────────────────────────────────────────────────────────────────────
 const DESIG_META = {
@@ -1101,6 +1102,8 @@ export default function FDAExplorer() {
         {sel && <Modal drug={sel} onClose={()=>setSel(null)}/>}
       </>}
 
+      {sel && <Modal drug={sel} onClose={()=>setSel(null)}/>}
+      <Analytics />
       {page==="dashboard" && <Dashboard/>}
     </div>
   );
