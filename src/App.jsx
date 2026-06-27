@@ -359,34 +359,90 @@ function fmtDate(s) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// STRUCTURE IMAGE — busca imagem PNG oficial do PubChem via CID
+// STRUCTURE CANVAS — RDKit.js (renderização local via SMILES)
 // ─────────────────────────────────────────────────────────────────────────────
 
+let _rdkit = null;
+let _rdkitLoading = false;
+let _rdkitCallbacks = [];
+
+function loadRDKit(cb) {
+  if (_rdkit) { cb(_rdkit); return; }
+  _rdkitCallbacks.push(cb);
+  if (_rdkitLoading) return;
+  _rdkitLoading = true;
+
+  // Carrega o script do RDKit via CDN
+  const s = document.createElement("script");
+  s.src = "https://unpkg.com/@rdkit/rdkit/Code/MinimalLib/dist/RDKit_minimal.js";
+  s.onload = () => {
+    window.initRDKitModule().then(rdk => {
+      _rdkit = rdk;
+      _rdkitCallbacks.forEach(fn => fn(rdk));
+      _rdkitCallbacks = [];
+    });
+  };
+  document.head.appendChild(s);
+}
+
 function StructureCanvas({ smiles, cid }) {
+  const ref = useRef();
   const [status, setStatus] = useState("loading"); // "loading" | "ok" | "error"
 
-  // URL oficial do PubChem para imagem PNG da estrutura
-  const imgUrl = cid
-    ? `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${cid}/PNG?image_size=300x300`
-    : null;
+  useEffect(() => {
+    if (!smiles || !ref.current) { setStatus("error"); return; }
+    setStatus("loading");
 
-  if (!cid) {
-    return (
-      <div style={{
-        width: 220, height: 220, borderRadius: 8,
-        border: `1px dashed ${C.bdr}`,
-        display: "flex", alignItems: "center", justifyContent: "center",
-        color: C.dim, fontSize: 11, textAlign: "center",
-        background: C.surfAlt, padding: 12,
-      }}>
-        Structure not available<br/>(no PubChem CID)
-      </div>
-    );
-  }
+    loadRDKit(rdk => {
+      try {
+        const mol = rdk.get_mol(smiles);
+        if (!mol) { setStatus("error"); return; }
+
+        // Gera SVG limpo com fundo branco
+        const svg = mol.get_svg_with_highlight(
+          JSON.stringify({
+            width: 220, height: 220,
+            bondLineWidth: 1.5,
+            addStereoAnnotation: true,
+            backgroundColour: [1, 1, 1, 1], // branco
+          })
+        );
+        mol.delete(); // libera memória
+
+        if (ref.current) {
+          ref.current.innerHTML = svg;
+          // Garante que o SVG ocupe 100% do container
+          const svgEl = ref.current.querySelector("svg");
+          if (svgEl) {
+            svgEl.style.width = "220px";
+            svgEl.style.height = "220px";
+          }
+          setStatus("ok");
+        }
+      } catch (e) {
+        setStatus("error");
+      }
+    });
+  }, [smiles]);
 
   return (
-    <div style={{ position: "relative", width: 220, height: 220 }}>
-      {/* Placeholder enquanto carrega */}
+    <div style={{ width: 220, height: 220, position: "relative" }}>
+      {/* Container do SVG */}
+      <div
+        ref={ref}
+        style={{
+          width: 220, height: 220,
+          borderRadius: 8,
+          border: `1px solid ${C.bdr}`,
+          background: "#fff",
+          display: status === "error" ? "none" : "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
+        }}
+      />
+
+      {/* Loading */}
       {status === "loading" && (
         <div style={{
           position: "absolute", inset: 0, borderRadius: 8,
@@ -398,34 +454,17 @@ function StructureCanvas({ smiles, cid }) {
         </div>
       )}
 
-      {/* Erro de carregamento */}
+      {/* Erro */}
       {status === "error" && (
         <div style={{
-          position: "absolute", inset: 0, borderRadius: 8,
+          width: 220, height: 220, borderRadius: 8,
           border: `1px dashed ${C.bdr}`, background: C.surfAlt,
           display: "flex", alignItems: "center", justifyContent: "center",
           color: C.dim, fontSize: 11, textAlign: "center", padding: 12,
         }}>
-          Structure unavailable
+          Structure not available
         </div>
       )}
-
-      {/* Imagem do PubChem */}
-      <img
-        src={imgUrl}
-        alt="Chemical structure"
-        onLoad={() => setStatus("ok")}
-        onError={() => setStatus("error")}
-        style={{
-          width: 220, height: 220,
-          borderRadius: 8,
-          border: `1px solid ${C.bdr}`,
-          background: "#fff",
-          display: status === "error" ? "none" : "block",
-          opacity: status === "loading" ? 0 : 1,
-          transition: "opacity 0.2s ease",
-        }}
-      />
     </div>
   );
 }
