@@ -357,51 +357,9 @@ function fmtDate(s) {
   if (!s) return "—";
   return new Date(s+"T12:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
 }
-
 // ─────────────────────────────────────────────────────────────────────────────
-// STRUCTURE CANVAS — RDKit.js (renderização local via SMILES)
+// STRUCTURE CANVAS — usa window.RDKit (carregado no index.html)
 // ─────────────────────────────────────────────────────────────────────────────
-
-let _rdkit = null;
-let _rdkitLoading = false;
-let _rdkitCallbacks = [];
-
-function loadRDKit(cb) {
-  if (_rdkit) { cb(_rdkit); return; }
-  _rdkitCallbacks.push(cb);
-  if (_rdkitLoading) return;
-  _rdkitLoading = true;
-
-  const s = document.createElement("script");
-  // IMPORTANTE: a URL é construída por partes para evitar que o "@" seguido de
-  // texto seja interpretado como e-mail e corrompido para "[email protected]".
-  // Versão fixada 2025.3.4-1.0.0 (evita redirecionamento do unpkg).
-  const RDKIT_BASE = "https://unpkg.com/@rdkit/rdkit" + "@" + "2025.3.4-1.0.0/dist/RDKit_minimal";
-  s.src = RDKIT_BASE + ".js";
-  s.onload = () => {
-    // locateFile aponta o .wasm explicitamente para o mesmo diretório do .js
-    window.initRDKitModule({
-      locateFile: () => RDKIT_BASE + ".wasm"
-    })
-      .then(rdk => {
-        _rdkit = rdk;
-        _rdkitLoading = false;
-        _rdkitCallbacks.forEach(fn => fn(rdk));
-        _rdkitCallbacks = [];
-      })
-      .catch(() => {
-        _rdkitLoading = false;
-        _rdkitCallbacks.forEach(fn => fn(null));
-        _rdkitCallbacks = [];
-      });
-  };
-  s.onerror = () => {
-    _rdkitLoading = false;
-    _rdkitCallbacks.forEach(fn => fn(null));
-    _rdkitCallbacks = [];
-  };
-  document.head.appendChild(s);
-}
 
 function StructureCanvas({ smiles, cid }) {
   const ref = useRef();
@@ -412,21 +370,29 @@ function StructureCanvas({ smiles, cid }) {
     setStatus("loading");
     let cancelled = false;
 
-    loadRDKit(rdk => {
+    // Espera o RDKit ficar pronto (carregado no index.html).
+    // Faz polling curto caso o app renderize antes do RDKit terminar de iniciar.
+    let tries = 0;
+    function tryRender() {
       if (cancelled) return;
-      if (!rdk) { setStatus("error"); return; }
 
+      // RDKit ainda não terminou de carregar — tenta de novo em 200ms
+      if (!window.RDKit) {
+        tries++;
+        if (tries > 50) { setStatus("error"); return; } // desiste após ~10s
+        setTimeout(tryRender, 200);
+        return;
+      }
+
+      // RDKit pronto — desenha a molécula
       let mol = null;
       try {
-        mol = rdk.get_mol(smiles);
-        // get_mol retorna um objeto inválido (não null) para SMILES ruins
+        mol = window.RDKit.get_mol(smiles);
         if (!mol || !mol.is_valid()) {
           setStatus("error");
           if (mol) mol.delete();
           return;
         }
-
-        // get_svg() puro é o método mais compatível entre versões
         const svg = mol.get_svg(220, 220);
         mol.delete();
 
@@ -445,28 +411,24 @@ function StructureCanvas({ smiles, cid }) {
         if (mol) { try { mol.delete(); } catch {} }
         if (!cancelled) setStatus("error");
       }
-    });
+    }
 
+    tryRender();
     return () => { cancelled = true; };
   }, [smiles]);
 
   return (
     <div style={{ width: 220, height: 220, position: "relative" }}>
-      {/* Container do SVG — sempre montado para o ref funcionar */}
       <div
         ref={ref}
         style={{
-          width: 220, height: 220,
-          borderRadius: 8,
-          border: `1px solid ${C.bdr}`,
-          background: "#fff",
-          overflow: "hidden",
-          position: "absolute", inset: 0,
+          width: 220, height: 220, borderRadius: 8,
+          border: `1px solid ${C.bdr}`, background: "#fff",
+          overflow: "hidden", position: "absolute", inset: 0,
           display: "flex", alignItems: "center", justifyContent: "center",
           visibility: status === "ok" ? "visible" : "hidden",
         }}
       />
-
       {status === "loading" && (
         <div style={{
           position: "absolute", inset: 0, borderRadius: 8,
@@ -477,7 +439,6 @@ function StructureCanvas({ smiles, cid }) {
           Loading structure...
         </div>
       )}
-
       {status === "error" && (
         <div style={{
           position: "absolute", inset: 0, borderRadius: 8,
