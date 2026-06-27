@@ -39,16 +39,6 @@ const YEARS = [2026,2025,2024,2023,2022];
 // PHYSICOCHEMICAL DATA
 // ─────────────────────────────────────────────────────────────────────────────
 const PC = {
-  // ─────────────────────────────────────────────────────────────
-// PC — CIDs, SMILES e propriedades verificados via PubChem
-// CIDs obtidos por NOME INN (fonte confiável). Gerado por rebuild_pc.py
-// ─────────────────────────────────────────────────────────────
-const PC = {
-  // ─────────────────────────────────────────────────────────────
-// PC — CIDs, SMILES e propriedades verificados via PubChem
-// CIDs obtidos por NOME INN (fonte confiável). Gerado por rebuild_pc.py
-// ─────────────────────────────────────────────────────────────
-const PC = {
   "orforglipron": {cid:137319706,f:"C48H48F2N10O5",mw:883.0,logp:6.8,hbd:1,hba:10,smiles:"C[C@H]1C[C@]1(C2=NOC(=O)N2)N3C4=C(C=C(C=C4)[C@H]5CCOC(C5)(C)C)C=C3C(=O)N6CCC7=NN(C(=C7[C@@H]6C)N8C=CN(C8=O)C9=C(C1=C(C=C9)N(N=C1)C)F)C1=CC(=C(C(=C1)C)F)C"},
   "relacorilant": {cid:73051463,f:"C27H22F4N6O3S",mw:586.6,logp:2.9,hbd:0,hba:11,smiles:"CN1C=C(C=N1)S(=O)(=O)N2CCC3=CC4=C(C[C@@]3(C2)C(=O)C5=NC=CC(=C5)C(F)(F)F)C=NN4C6=CC=C(C=C6)F"},
   "linerixibat": {cid:53492727,f:"C28H38N2O7S",mw:546.7,logp:-1.6,hbd:4,hba:9,smiles:"CCCC[C@@]1(CS(=O)(=O)C2=C(C=C(C(=C2)CNC(CC(=O)O)CC(=O)O)OC)[C@H](N1)C3=CC=CC=C3)CC"},
