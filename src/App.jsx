@@ -372,15 +372,27 @@ function loadRDKit(cb) {
   if (_rdkitLoading) return;
   _rdkitLoading = true;
 
-  // Carrega o script do RDKit via CDN
   const s = document.createElement("script");
-  s.src = "https://unpkg.com/@rdkit/rdkit/Code/MinimalLib/dist/RDKit_minimal.js";
+  // URL oficial — o .js e o .wasm são servidos juntos a partir de /dist/
+  s.src = "https://unpkg.com/@rdkit/rdkit/dist/RDKit_minimal.js";
   s.onload = () => {
-    window.initRDKitModule().then(rdk => {
-      _rdkit = rdk;
-      _rdkitCallbacks.forEach(fn => fn(rdk));
-      _rdkitCallbacks = [];
-    });
+    window.initRDKitModule()
+      .then(rdk => {
+        _rdkit = rdk;
+        _rdkitLoading = false;
+        _rdkitCallbacks.forEach(fn => fn(rdk));
+        _rdkitCallbacks = [];
+      })
+      .catch(() => {
+        _rdkitLoading = false;
+        _rdkitCallbacks.forEach(fn => fn(null));
+        _rdkitCallbacks = [];
+      });
+  };
+  s.onerror = () => {
+    _rdkitLoading = false;
+    _rdkitCallbacks.forEach(fn => fn(null));
+    _rdkitCallbacks = [];
   };
   document.head.appendChild(s);
 }
@@ -390,44 +402,51 @@ function StructureCanvas({ smiles, cid }) {
   const [status, setStatus] = useState("loading"); // "loading" | "ok" | "error"
 
   useEffect(() => {
-    if (!smiles || !ref.current) { setStatus("error"); return; }
+    if (!smiles) { setStatus("error"); return; }
     setStatus("loading");
+    let cancelled = false;
 
     loadRDKit(rdk => {
+      if (cancelled) return;
+      if (!rdk) { setStatus("error"); return; }
+
+      let mol = null;
       try {
-        const mol = rdk.get_mol(smiles);
-        if (!mol) { setStatus("error"); return; }
+        mol = rdk.get_mol(smiles);
+        // get_mol retorna um objeto inválido (não null) para SMILES ruins
+        if (!mol || !mol.is_valid()) {
+          setStatus("error");
+          if (mol) mol.delete();
+          return;
+        }
 
-        // Gera SVG limpo com fundo branco
-        const svg = mol.get_svg_with_highlight(
-          JSON.stringify({
-            width: 220, height: 220,
-            bondLineWidth: 1.5,
-            addStereoAnnotation: true,
-            backgroundColour: [1, 1, 1, 1], // branco
-          })
-        );
-        mol.delete(); // libera memória
+        // get_svg() puro é o método mais compatível entre versões
+        const svg = mol.get_svg(220, 220);
+        mol.delete();
 
-        if (ref.current) {
+        if (!cancelled && ref.current) {
           ref.current.innerHTML = svg;
-          // Garante que o SVG ocupe 100% do container
           const svgEl = ref.current.querySelector("svg");
           if (svgEl) {
+            svgEl.setAttribute("width", "220");
+            svgEl.setAttribute("height", "220");
             svgEl.style.width = "220px";
             svgEl.style.height = "220px";
           }
           setStatus("ok");
         }
-      } catch (e) {
-        setStatus("error");
+      } catch {
+        if (mol) { try { mol.delete(); } catch {} }
+        if (!cancelled) setStatus("error");
       }
     });
+
+    return () => { cancelled = true; };
   }, [smiles]);
 
   return (
     <div style={{ width: 220, height: 220, position: "relative" }}>
-      {/* Container do SVG */}
+      {/* Container do SVG — sempre montado para o ref funcionar */}
       <div
         ref={ref}
         style={{
@@ -435,14 +454,13 @@ function StructureCanvas({ smiles, cid }) {
           borderRadius: 8,
           border: `1px solid ${C.bdr}`,
           background: "#fff",
-          display: status === "error" ? "none" : "flex",
-          alignItems: "center",
-          justifyContent: "center",
           overflow: "hidden",
+          position: "absolute", inset: 0,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          visibility: status === "ok" ? "visible" : "hidden",
         }}
       />
 
-      {/* Loading */}
       {status === "loading" && (
         <div style={{
           position: "absolute", inset: 0, borderRadius: 8,
@@ -454,10 +472,9 @@ function StructureCanvas({ smiles, cid }) {
         </div>
       )}
 
-      {/* Erro */}
       {status === "error" && (
         <div style={{
-          width: 220, height: 220, borderRadius: 8,
+          position: "absolute", inset: 0, borderRadius: 8,
           border: `1px dashed ${C.bdr}`, background: C.surfAlt,
           display: "flex", alignItems: "center", justifyContent: "center",
           color: C.dim, fontSize: 11, textAlign: "center", padding: 12,
