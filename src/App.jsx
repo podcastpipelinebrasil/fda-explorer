@@ -359,32 +359,75 @@ function fmtDate(s) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// SmilesDrawer v1.0.10 — confirmed working iOS Safari
+// STRUCTURE IMAGE — busca imagem PNG oficial do PubChem via CID
 // ─────────────────────────────────────────────────────────────────────────────
-const SD_OPTS = {
-  width:220, height:220, bondThickness:1.4, fontSizeLarge:5,
-  themes:{ light:{ C:"#1a2340", O:"#cc0000", N:"#0033cc", F:"#007700",
-    Cl:"#006600", Br:"#882200", S:"#aaaa00", P:"#ff8800", BACKGROUND:"#ffffff"}}
-};
-let _sdReady=false, _sdQ=[];
-function withSD(cb) {
-  if (_sdReady && window.SmilesDrawer) { cb(window.SmilesDrawer); return; }
-  _sdQ.push(cb);
-  if (document.getElementById("sd-script")) return;
-  const s=document.createElement("script");
-  s.id="sd-script";
-  s.src="https://cdn.jsdelivr.net/npm/smiles-drawer@1.0.10/dist/smiles-drawer.min.js";
-  s.onload=()=>{ _sdReady=true; _sdQ.forEach(fn=>fn(window.SmilesDrawer)); _sdQ=[]; };
-  document.head.appendChild(s);
-}
-function StructureCanvas({ smiles }) {
-  const ref=useRef();
-  useEffect(()=>{
-    if (!smiles||!ref.current) return;
-    withSD(SD=>{ SD.parse(smiles, tree=>{ new SD.Drawer(SD_OPTS).draw(tree,ref.current,"light",false); }, ()=>{}); });
-  },[smiles]);
-  return <canvas ref={ref} width={220} height={220}
-    style={{borderRadius:8,border:`1px solid ${C.bdr}`,display:"block"}}/>;
+
+function StructureCanvas({ smiles, cid }) {
+  const [status, setStatus] = useState("loading"); // "loading" | "ok" | "error"
+
+  // URL oficial do PubChem para imagem PNG da estrutura
+  const imgUrl = cid
+    ? `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${cid}/PNG?image_size=300x300`
+    : null;
+
+  if (!cid) {
+    return (
+      <div style={{
+        width: 220, height: 220, borderRadius: 8,
+        border: `1px dashed ${C.bdr}`,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        color: C.dim, fontSize: 11, textAlign: "center",
+        background: C.surfAlt, padding: 12,
+      }}>
+        Structure not available<br/>(no PubChem CID)
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ position: "relative", width: 220, height: 220 }}>
+      {/* Placeholder enquanto carrega */}
+      {status === "loading" && (
+        <div style={{
+          position: "absolute", inset: 0, borderRadius: 8,
+          border: `1px solid ${C.bdr}`, background: C.surfAlt,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          color: C.dim, fontSize: 11,
+        }}>
+          Loading structure...
+        </div>
+      )}
+
+      {/* Erro de carregamento */}
+      {status === "error" && (
+        <div style={{
+          position: "absolute", inset: 0, borderRadius: 8,
+          border: `1px dashed ${C.bdr}`, background: C.surfAlt,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          color: C.dim, fontSize: 11, textAlign: "center", padding: 12,
+        }}>
+          Structure unavailable
+        </div>
+      )}
+
+      {/* Imagem do PubChem */}
+      <img
+        src={imgUrl}
+        alt="Chemical structure"
+        onLoad={() => setStatus("ok")}
+        onError={() => setStatus("error")}
+        style={{
+          width: 220, height: 220,
+          borderRadius: 8,
+          border: `1px solid ${C.bdr}`,
+          background: "#fff",
+          display: status === "error" ? "none" : "block",
+          opacity: status === "loading" ? 0 : 1,
+          transition: "opacity 0.2s ease",
+        }}
+      />
+    </div>
+  );
 }
 
 // ─────���───────────────────────────────────────────────────────────────────────
@@ -566,8 +609,8 @@ function Modal({ drug, onClose }) {
         {!bio && pc && (
           <div style={{display:"flex",gap:20,marginBottom:18,flexWrap:"wrap"}}>
             <div>
-              {pc.smiles
-                ? <StructureCanvas smiles={pc.smiles}/>
+              {(pc.smiles || pc.cid)
+                ? <StructureCanvas smiles={pc.smiles} cid={pc.cid}/>
                 : <div style={{width:220,height:220,borderRadius:8,border:`1px dashed ${C.bdr}`,
                     display:"flex",alignItems:"center",justifyContent:"center",
                     color:C.dim,fontSize:11,textAlign:"center",background:C.surfAlt}}>
