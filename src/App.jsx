@@ -373,10 +373,16 @@ function loadRDKit(cb) {
   _rdkitLoading = true;
 
   const s = document.createElement("script");
-  // URL oficial — o .js e o .wasm são servidos juntos a partir de /dist/
-  s.src = "https://unpkg.com/@rdkit/rdkit/dist/RDKit_minimal.js";
+  // IMPORTANTE: a URL é construída por partes para evitar que o "@" seguido de
+  // texto seja interpretado como e-mail e corrompido para "[email protected]".
+  // Versão fixada 2025.3.4-1.0.0 (evita redirecionamento do unpkg).
+  const RDKIT_BASE = "https://unpkg.com/@rdkit/rdkit" + "@" + "2025.3.4-1.0.0/dist/RDKit_minimal";
+  s.src = RDKIT_BASE + ".js";
   s.onload = () => {
-    window.initRDKitModule()
+    // locateFile aponta o .wasm explicitamente para o mesmo diretório do .js
+    window.initRDKitModule({
+      locateFile: () => RDKIT_BASE + ".wasm"
+    })
       .then(rdk => {
         _rdkit = rdk;
         _rdkitLoading = false;
