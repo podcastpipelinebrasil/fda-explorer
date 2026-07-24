@@ -37,6 +37,7 @@ const YEARS = [2026,2025,2024,2023,2022];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // PHYSICOCHEMICAL DATA
+// CIDs, SMILES e propriedades verificados via PubChem (rebuild_pc.py)
 // ─────────────────────────────────────────────────────────────────────────────
 const PC = {
   "orforglipron": {cid:137319706,f:"C48H48F2N10O5",mw:883.0,logp:6.8,hbd:1,hba:10,smiles:"C[C@H]1C[C@]1(C2=NOC(=O)N2)N3C4=C(C=C(C=C4)[C@H]5CCOC(C5)(C)C)C=C3C(=O)N6CCC7=NN(C(=C7[C@@H]6C)N8C=CN(C8=O)C9=C(C1=C(C=C9)N(N=C1)C)F)C1=CC(=C(C(=C1)C)F)C"},
@@ -110,6 +111,8 @@ const PC = {
   "ensitrelvir": {cid:162533924,f:"C22H17ClF3N9O2",mw:531.9,logp:2.5,hbd:1,hba:8,smiles:"CN1C=C2C=C(C(=CC2=N1)Cl)NC3=NC(=O)N(C(=O)N3CC4=CC(=C(C=C4F)F)F)CC5=NN(C=N5)C"},
   "cipepofol": {cid:86301664,f:"C14H20O",mw:204.31,logp:4.4,hbd:1,hba:1,smiles:"C[C@H](C1CC1)C2=CC=CC(=C2O)C(C)C"},
   "gadoquatrane": {cid:156596411,f:"C81H128Gd4N24O32",mw:2579.0,logp:null,hbd:8,hba:48,smiles:"CC(C(=O)NCC(=O)NCC(CNC(=O)CNC(=O)C(C)N1CCN(CCN(CCN(CC1)CC(=O)[O-])CC(=O)[O-])CC(=O)[O-])(CNC(=O)CNC(=O)C(C)N2CCN(CCN(CCN(CC2)CC(=O)[O-])CC(=O)[O-])CC(=O)[O-])CNC(=O)CNC(=O)C(C)N3CCN(CCN(CCN(CC3)CC(=O)[O-])CC(=O)[O-])CC(=O)[O-])N4CCN(CCN(CCN(CC4)CC(=O)[O-])CC(=O)[O-])CC(=O)[O-].[Gd+3].[Gd+3].[Gd+3].[Gd+3]"},
+  // ── Aprovações 2026 #22–28: rodar rebuild_pc.py com os nomes abaixo ──
+  // "tebipenem pivoxil", "gedatolisib", "enlicitide decanoate", "zidesamtinib"
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -117,7 +120,15 @@ const PC = {
 // ─────────────────────────────────────────────────────────────────────────────
 const RAW = {
   2026:[
+    // ── Julho 2026 ──
+    {name:"Lytenava",   ing:"bevacizumab-vikg",         date:"2026-07-24",sponsor:"Outlook Therapeutics",route:"OCUL",moa:"Anticorpo monoclonal humanizado recombinante anti-VEGF em formulação oftálmica para injeção intravítrea; liga-se a todas as isoformas do VEGF humano e bloqueia estericamente sua ligação aos receptores VEGFR-1 (Flt-1) e VEGFR-2 (KDR). Primeira formulação oftálmica de bevacizumabe aprovada nos EUA",atc:"S01LA",desig:[],indication:"Neovascular (wet) age-related macular degeneration"},
+    {name:"Jideytro",   ing:"zidesamtinib",             date:"2026-07-22",sponsor:"GSK (Nuvalent)",route:"PO",moa:"Inibidor de quinase ROS1-seletivo de nova geração; desenhado para manter atividade contra mutações de resistência e com penetração no SNC",atc:"L01EX",desig:["BT","OD"],indication:"Locally advanced or metastatic ROS1-positive NSCLC in adults after receiving a ROS1 kinase inhibitor"},
+    {name:"Lipfendra",  ing:"enlicitide decanoate",     date:"2026-07-15",sponsor:"Merck",route:"PO",moa:"Primeiro inibidor oral de PCSK9 (peptídeo macrocíclico); bloqueia a ligação da PCSK9 ao receptor de LDL, preservando os receptores e aumentando a depuração hepática de LDL-C",atc:"C10AX",desig:["FIC"],indication:"Reduction of low-density lipoprotein cholesterol (LDL-C) in adults with hypercholesterolemia, including heterozygous familial hypercholesterolemia"},
+    {name:"Revtorpyk",  ing:"gedatolisib",              date:"2026-07-14",sponsor:"Celcuity",route:"IV",moa:"Inibidor pan-PAM: bloqueia as quatro isoformas de PI3K classe I (α, β, δ, γ) e os complexos mTORC1 e mTORC2 — primeiro inibidor da via PAM aprovado pelo FDA",atc:"L01EM",desig:["FIC"],indication:"HR+/HER2−, PIK3CA wild-type locally advanced or metastatic breast cancer, in combination with fulvestrant, after ≥1 line of endocrine therapy in the metastatic setting"},
+    {name:"Trutakna",   ing:"atacicept-vymj",           date:"2026-07-07",sponsor:"Vera Therapeutics",route:"SC",moa:"Proteína de fusão recombinante contendo o receptor TACI solúvel; primeiro inibidor duplo de BAFF e APRIL, reduzindo a sobrevida de células B e a produção de autoanticorpos",atc:"L04AA",desig:["AA","BT","PR","FIC"],indication:"Reduction of proteinuria in adults with primary immunoglobulin A nephropathy (IgAN) at risk for disease progression"},
     // ── Junho 2026 ──
+    {name:"Lumvoa",     ing:"veligrotug-vvze",          date:"2026-06-26",sponsor:"Viridian Therapeutics",route:"IV",moa:"Anticorpo monoclonal IgG1 humanizado antagonista total do receptor IGF-1 (IGF-1R); interrompe o cross-talk IGF-1R/TSHR em fibroblastos orbitários, reduzindo inflamação e remodelamento tecidual",atc:"S01XA",desig:["BT","PR"],indication:"Thyroid eye disease (TED), regardless of disease activity or duration — active and chronic"},
+    {name:"Utebzi",     ing:"tebipenem pivoxil",        date:"2026-06-17",sponsor:"GSK / Spero Therapeutics",route:"PO",moa:"Pró-fármaco éster de carbapenêmico — primeiro e único carbapenêmico oral aprovado. Inibe as proteínas ligadoras de penicilina (PBPs), bloqueando a síntese da parede celular bacteriana",atc:"J01DH",desig:["FT"],indication:"Complicated urinary tract infections (cUTI) including pyelonephritis in adults with limited or no alternative oral treatment options"},
     {name:"Ambelvist",  ing:"gadoquatrane",             date:"2026-06-12",sponsor:"Bayer",route:"IV",moa:"Macrocyclic gadolinium-based MRI contrast agent (GBCA); shortens T1 relaxation time",atc:"V08CA",desig:["PR"],indication:"Detection and visualization of lesions with abnormal vascularity (CNS and non-CNS) in conjunction with MRI"},
     // ── Maio 2026 ──
     {name:"Cypsedo",    ing:"cipepofol",                date:"2026-05-29",sponsor:"Haisco Pharmaceutical",route:"IV",moa:"GABA-A positive allosteric modulator; ~4-5× more potent than propofol with faster onset and shorter recovery",atc:"N01AX",desig:["PR"],indication:"Induction of general anesthesia in adults undergoing surgery"},
@@ -127,7 +138,6 @@ const RAW = {
     {name:"Hepcludex",  ing:"bulevirtide-gmod",         date:"2026-05-22",sponsor:"Gilead Sciences",route:"SC",moa:"Lipopeptide entry inhibitor; mimics HBsAg preS1 domain and blocks NTCP receptor to prevent HDV and HBV hepatocyte entry",atc:"J05AX",desig:["AA","BT","OD","PR","FIC"],indication:"Chronic hepatitis delta virus (HDV) infection in adults without or with compensated cirrhosis"},
     {name:"Baxfendy",   ing:"baxdrostat",               date:"2026-05-15",sponsor:"AstraZeneca",route:"PO",moa:"First-in-class highly selective aldosterone synthase (CYP11B2) inhibitor; reduces aldosterone production and blood pressure without materially affecting cortisol",atc:"C02KX",desig:["FIC","PR"],indication:"Hypertension in combination with other antihypertensive drugs in adults not adequately controlled"},
     {name:"Beqalzi",    ing:"sonrotoclax",              date:"2026-05-13",sponsor:"BeOne Medicines",route:"PO",moa:"Next-generation BCL-2 inhibitor designed for greater potency and selectivity; restores apoptosis in BCL-2-overexpressing lymphoma cells with improved TLS risk profile vs. earlier BCL-2 inhibitors",atc:"L01XK",desig:["AA","BT","PR"],indication:"Relapsed or refractory mantle cell lymphoma after ≥2 lines of therapy including a BTK inhibitor"},
-    // ── Maio 2026 (antes do dia 13) ──
     {name:"Veppanu",    ing:"vepdegestrant",            date:"2026-05-01",sponsor:"Arvinas / Pfizer",route:"PO",moa:"First-in-class PROTAC (PROteolysis TArgeting Chimera); recruits E3 ligase CRBN to ERα, triggering its proteasomal degradation — eliminates receptor rather than merely blocking it",atc:"L02BA",desig:["BT","PR","FIC"],indication:"ESR1-mutated, ER+/HER2- advanced or metastatic breast cancer after ≥1 line of endocrine therapy"},
     // ── Abril 2026 ──
     {name:"Idvynso",    ing:"doravirine and islatravir",date:"2026-04-20",sponsor:"Merck",route:"PO",moa:"NNRTI (doravirine) + nucleoside reverse transcriptase translocation inhibitor (islatravir); dual mechanism complete HIV-1 regimen",atc:"J05AR",desig:["BT","PR"],indication:"HIV-1 infection in virologically-suppressed adults on a stable ARV regimen with no history of virologic failure"},
@@ -320,10 +330,12 @@ const RAW = {
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Biologic detection
+// NOTA: o regex exige hífen antes do sufixo. Sufixos acrescentados em jul/2026:
+//   vvze (veligrotug), vymj (atacicept), vikg (bevacizumab)
 // ─────────────────────────────────────────────────────────────────────────────
 function isBiologic(ing) {
-  return /-(mab|cept|alfa|beta|gamma|deruxtecan|vedotin|wuug|szsi|hrii|hncq|tllv|kcqx|cfor|aahu|bcmm|tgvs|mrkz|irmb|lbkz|trbw|dlnk|nbln|ipdl|zbco|clzb|mtci|ulaa|eknm|gcpt|liga|dpyl|jome|actl|gmod|pvzy)\b/i.test(ing) ||
-    /\b(narsoplimab|sibeprenlimab|depemokimab|icotrokinra|navepegritide|pegzilarginase|tividenofusp|concizumab|linvoseltamab|garadacimab|clesrovimab|telisotuzumab|nipocalimab|penpulimab|datopotamab|pembrolizumab|plozasiran|fitusiran|vutrisiran|nedosiran|olezarsen|tofersen|insulin icodec|bulevirtide|pivekimab)\b/i.test(ing);
+  return /-(mab|cept|alfa|beta|gamma|deruxtecan|vedotin|wuug|szsi|hrii|hncq|tllv|kcqx|cfor|aahu|bcmm|tgvs|mrkz|irmb|lbkz|trbw|dlnk|nbln|ipdl|zbco|clzb|mtci|ulaa|eknm|gcpt|liga|dpyl|jome|actl|gmod|pvzy|vvze|vymj|vikg)\b/i.test(ing) ||
+    /\b(narsoplimab|sibeprenlimab|depemokimab|icotrokinra|navepegritide|pegzilarginase|tividenofusp|concizumab|linvoseltamab|garadacimab|clesrovimab|telisotuzumab|nipocalimab|penpulimab|datopotamab|pembrolizumab|plozasiran|fitusiran|vutrisiran|nedosiran|olezarsen|tofersen|insulin icodec|bulevirtide|pivekimab|veligrotug|atacicept|bevacizumab)\b/i.test(ing);
 }
 
 function processData(raw) {
@@ -358,10 +370,10 @@ function fmtDate(s) {
   if (!s) return "—";
   return new Date(s+"T12:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
 }
+
 // ─────────────────────────────────────────────────────────────────────────────
 // STRUCTURE CANVAS — usa window.RDKit (carregado no index.html)
 // ─────────────────────────────────────────────────────────────────────────────
-
 function StructureCanvas({ smiles, cid }) {
   const ref = useRef();
   const [status, setStatus] = useState("loading"); // "loading" | "ok" | "error"
@@ -454,7 +466,7 @@ function StructureCanvas({ smiles, cid }) {
   );
 }
 
-// ─────���───────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
 // UI COMPONENTS
 // ─────────────────────────────────────────────────────────────────────────────
 const DESIG_META = {
@@ -482,7 +494,7 @@ function TypeBadge({ bio }) {
 }
 
 const ROUTE_LABEL = {PO:"Oral",IV:"Intravenous",SC:"Subcutaneous",IM:"Intramuscular",
-  IN:"Intranasal",TOP:"Topical",OCUL:"Ocular",IH:"Inhaled"};
+  IN:"Intranasal",TOP:"Topical",OCUL:"Ocular",IH:"Inhaled",IT:"Intrathecal"};
 
 function DrugCard({ drug, onClick }) {
   const bio = drug.type==="biologic";
@@ -1161,13 +1173,12 @@ export default function FDAExplorer() {
             </div>
           )}
         </main>
-
-        {sel && <Modal drug={sel} onClose={()=>setSel(null)}/>}
       </>}
+
+      {page==="dashboard" && <Dashboard/>}
 
       {sel && <Modal drug={sel} onClose={()=>setSel(null)}/>}
       <Analytics />
-      {page==="dashboard" && <Dashboard/>}
     </div>
   );
 }
