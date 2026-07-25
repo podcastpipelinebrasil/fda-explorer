@@ -55,7 +55,7 @@ const PC = {
   "remibrutinib": {cid:118107483,f:"C27H27F2N5O3",mw:507.5,logp:3.9,hbd:2,hba:8,smiles:"CC1=C(C=C(C=C1NC(=O)C2=C(C=C(C=C2)C3CC3)F)F)C4=C(C(=NC=N4)N)OCCN(C)C(=O)C=C"},
   "paltusotine": {cid:134168328,f:"C27H22F2N4O",mw:456.5,logp:5.3,hbd:2,hba:7,smiles:"C1CN(CCC1N)C2=C3C=C(C=CC3=NC=C2C4=CC(=CC(=C4)F)F)C5=CC=CC(=C5O)C#N"},
   "imlunestrant": {cid:146603228,f:"C29H24F4N2O3",mw:524.5,logp:6,hbd:1,hba:9,smiles:"C1C(CN1CCOC2=CC=C(C=C2)[C@@H]3C4=C5C=CC(=CC5=NC=C4C6=C(O3)C=C(C=C6)C(F)(F)F)O)CF"},
-  "rilzabrutinib": {cid:73388818,f:"C36H40FN9O3",mw:665.8,logp:3.4,hbd:1,hba:11,smiles:"CC(C)(/C=C(\\C#N)/C(=O)N1CCC[C@H](C1)N2C3=NC=NC(=C3C(=N2)C4=C(C=C(C=C4)OC5=CC=CC=C5)F)N)N6CCN(CC6)C7COC7"},
+  "rilzabrutinib": {cid:73388818,f:"C36H40FN9O3",mw:665.8,logp:3.4,hbd:1,hba:11,smiles:"CC(C)(/C=C(\C#N)/C(=O)N1CCC[C@H](C1)N2C3=NC=NC(=C3C(=N2)C4=C(C=C(C=C4)OC5=CC=CC=C5)F)N)N6CCN(CC6)C7COC7"},
   "donidalorsen": {cid:null,f:"",mw:null,logp:null,hbd:null,hba:null,smiles:null},
   "brensocatib": {cid:118253852,f:"C23H24N4O4",mw:420.5,logp:2,hbd:2,hba:6,smiles:"CN1C2=C(C=CC(=C2)C3=CC=C(C=C3)C[C@@H](C#N)NC(=O)[C@@H]4CNCCCO4)OC1=O"},
   "zongertinib": {cid:160283094,f:"C29H29N9O2",mw:535.6,logp:4.1,hbd:2,hba:9,smiles:"CC1=C(C=CC(=C1)NC2=NC=NC3=CN=C(N=C32)N4CCC(CC4)NC(=O)C=C)OC5=CC6=C(C=C5)N(C=N6)C"},
@@ -111,8 +111,10 @@ const PC = {
   "ensitrelvir": {cid:162533924,f:"C22H17ClF3N9O2",mw:531.9,logp:2.5,hbd:1,hba:8,smiles:"CN1C=C2C=C(C(=CC2=N1)Cl)NC3=NC(=O)N(C(=O)N3CC4=CC(=C(C=C4F)F)F)CC5=NN(C=N5)C"},
   "cipepofol": {cid:86301664,f:"C14H20O",mw:204.31,logp:4.4,hbd:1,hba:1,smiles:"C[C@H](C1CC1)C2=CC=CC(=C2O)C(C)C"},
   "gadoquatrane": {cid:156596411,f:"C81H128Gd4N24O32",mw:2579.0,logp:null,hbd:8,hba:48,smiles:"CC(C(=O)NCC(=O)NCC(CNC(=O)CNC(=O)C(C)N1CCN(CCN(CCN(CC1)CC(=O)[O-])CC(=O)[O-])CC(=O)[O-])(CNC(=O)CNC(=O)C(C)N2CCN(CCN(CCN(CC2)CC(=O)[O-])CC(=O)[O-])CC(=O)[O-])CNC(=O)CNC(=O)C(C)N3CCN(CCN(CCN(CC3)CC(=O)[O-])CC(=O)[O-])CC(=O)[O-])N4CCN(CCN(CCN(CC4)CC(=O)[O-])CC(=O)[O-])CC(=O)[O-].[Gd+3].[Gd+3].[Gd+3].[Gd+3]"},
-  // ── Aprovações 2026 #22–28: rodar rebuild_pc.py com os nomes abaixo ──
-  // "tebipenem pivoxil", "gedatolisib", "enlicitide decanoate", "zidesamtinib"
+  "tebipenem pivoxil": {cid:9892071,f:"C22H31N3O6S2",mw:497.6,logp:2.3,hbd:1,hba:9,smiles:"C[C@@H]1[C@@H]2[C@H](C(=O)N2C(=C1SC3CN(C3)C4=NCCS4)C(=O)OCOC(=O)C(C)(C)C)[C@@H](C)O"},
+  "gedatolisib": {cid:44516953,f:"C32H41N9O4",mw:615.7,logp:2.4,hbd:2,hba:10,smiles:"CN(C)C1CCN(CC1)C(=O)C2=CC=C(C=C2)NC(=O)NC3=CC=C(C=C3)C4=NC(=NC(=N4)N5CCOCC5)N6CCOCC6"},
+  "enlicitide decanoate": {cid:172866837,f:"C92H129FN14O17",mw:1722.1,logp:null,hbd:10,hba:18,smiles:"CCCCCCCCCC(=O)[O-].C[C@H]1C(=O)N[C@@H](C(=O)N[C@H]2CC3=CC(=CC=C3)CNC(=O)CO[C@H]4CCN5[C@@H]4C(=O)N[C@H](C(=O)N[C@H](C(=O)N6CCC[C@]6(C(=O)NCCC7=CC=C(CN(CCCCCCN8C=C(C[C@@H](C5=O)NC2=O)C9=C8C=CC(=C9)F)C(=O)CCC(=O)N1)C=C7)C)CC1=CC=C(C=C1)OC)[C@@H](C)O)CNC(=O)CCCCC[N+](C)(C)C"},
+  "zidesamtinib": {cid:166560233,f:"C22H22FN7O",mw:419.5,logp:2.8,hbd:1,hba:7,smiles:"CCN1C2=C(CC3=NN(N=C3C4=C(C=C(C=C4)F)[C@H](OC5=C(N=CC2=C5)N)C)C)C=N1"},
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
