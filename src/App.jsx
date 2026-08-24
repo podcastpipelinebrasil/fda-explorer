@@ -115,6 +115,10 @@ const PC = {
   "gedatolisib": {cid:44516953,f:"C32H41N9O4",mw:615.7,logp:2.4,hbd:2,hba:10,smiles:"CN(C)C1CCN(CC1)C(=O)C2=CC=C(C=C2)NC(=O)NC3=CC=C(C=C3)C4=NC(=NC(=N4)N5CCOCC5)N6CCOCC6"},
   "enlicitide decanoate": {cid:172866837,f:"C92H129FN14O17",mw:1722.1,logp:null,hbd:10,hba:18,smiles:"CCCCCCCCCC(=O)[O-].C[C@H]1C(=O)N[C@@H](C(=O)N[C@H]2CC3=CC(=CC=C3)CNC(=O)CO[C@H]4CCN5[C@@H]4C(=O)N[C@H](C(=O)N[C@H](C(=O)N6CCC[C@]6(C(=O)NCCC7=CC=C(CN(CCCCCCN8C=C(C[C@@H](C5=O)NC2=O)C9=C8C=CC(=C9)F)C(=O)CCC(=O)N1)C=C7)C)CC1=CC=C(C=C1)OC)[C@@H](C)O)CNC(=O)CCCCC[N+](C)(C)C"},
   "zidesamtinib": {cid:166560233,f:"C22H22FN7O",mw:419.5,logp:2.8,hbd:1,hba:7,smiles:"CCN1C2=C(CC3=NN(N=C3C4=C(C=C(C=C4)F)[C@H](OC5=C(N=CC2=C5)N)C)C)C=N1"},
+  "centanafadine": {cid:16095349,f:"C15H15N",mw:209.29,logp:3,hbd:1,hba:1,smiles:"C1[C@H]2[C@@]1(CNC2)C3=CC4=CC=CC=C4C=C3"},
+  "oveporexton": {cid:154617563,f:"C23H25F5N2O4S",mw:520.5,logp:3.6,hbd:2,hba:10,smiles:"CCS(=O)(=O)N[C@@H]1[C@@H](N(CC1(F)F)C(=O)C(C)(C)O)CC2=C(C(=CC=C2)C3=CC(=CC(=C3)F)F)F"},
+  "iberdomide": {cid:67335295,f:"C25H27N3O5",mw:449.5,logp:1.1,hbd:1,hba:6,smiles:"C1CC(=O)NC(=O)[C@H]1N2CC3=C(C2=O)C=CC=C3OCC4=CC=C(C=C4)CN5CCOCC5"},
+  "florquinitau": {cid:118577045,f:"C16H11FN4",mw:278.28,logp:2.5,hbd:1,hba:4,smiles:"C1=CC(=C(C2=CC(=NC=C21)N3C=CC4=C3C=NC=C4)N)F"},
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
