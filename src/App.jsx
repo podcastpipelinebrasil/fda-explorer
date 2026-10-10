@@ -356,8 +356,8 @@ const RAW = {
 //   vvze (veligrotug), vymj (atacicept), vikg (bevacizumab)
 // ─────────────────────────────────────────────────────────────────────────────
 function isBiologic(ing) {
-  return /-(mab|cept|alfa|beta|gamma|deruxtecan|vedotin|wuug|szsi|hrii|hncq|tllv|kcqx|cfor|aahu|bcmm|tgvs|mrkz|irmb|lbkz|trbw|dlnk|nbln|ipdl|zbco|clzb|mtci|ulaa|eknm|gcpt|liga|dpyl|jome|actl|gmod|pvzy|vvze|vymj|vikg|grts)\b/i.test(ing) ||
-    /\b(narsoplimab|sibeprenlimab|depemokimab|icotrokinra|navepegritide|pegzilarginase|tividenofusp|concizumab|linvoseltamab|garadacimab|clesrovimab|telisotuzumab|nipocalimab|penpulimab|datopotamab|pembrolizumab|plozasiran|fitusiran|vutrisiran|nedosiran|olezarsen|tofersen|insulin icodec|bulevirtide|pivekimab|veligrotug|atacicept|bevacizumab|garetosmab)\b/i.test(ing);
+  return /-(mab|cept|alfa|beta|gamma|deruxtecan|vedotin|wuug|szsi|hrii|hncq|tllv|kcqx|cfor|aahu|bcmm|tgvs|mrkz|irmb|lbkz|trbw|dlnk|nbln|ipdl|zbco|clzb|mtci|ulaa|eknm|gcpt|liga|dpyl|jome|actl|gmod|pvzy|vvze|vymj|vikg|grts|mstn|gobe)\b/i.test(ing) ||
+    /\b(narsoplimab|sibeprenlimab|depemokimab|icotrokinra|navepegritide|pegzilarginase|tividenofusp|concizumab|linvoseltamab|garadacimab|clesrovimab|telisotuzumab|nipocalimab|penpulimab|datopotamab|pembrolizumab|plozasiran|fitusiran|vutrisiran|nedosiran|olezarsen|tofersen|insulin icodec|bulevirtide|pivekimab|veligrotug|atacicept|bevacizumab|garetosmab|zilganersen)\b/i.test(ing);
 }
 
 function processData(raw) {
