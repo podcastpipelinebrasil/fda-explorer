@@ -40,6 +40,16 @@ const YEARS = [2026,2025,2024,2023,2022];
 // CIDs, SMILES e propriedades verificados via PubChem (rebuild_pc.py)
 // ─────────────────────────────────────────────────────────────────────────────
 const PC = {
+  "daraxonrasib": {cid:164726578,f:"C44H58N8O5S",mw:811.0,logp:5.1,hbd:2,hba:11,smiles:"CCN1C2=C3C=C(C=C2)C4=CSC(=N4)C[C@@H](C(=O)N5CCC[C@H](N5)C(=O)OCC(CC3=C1C6=C(N=CC(=C6)N7CCN(CC7)C)[C@H](C)OC)(C)C)NC(=O)[C@H]8C[C@@H]8C"},
+  "brepocitinib": {cid:118878093,f:"C18H21F2N7O",mw:389.4,logp:1.5,hbd:1,hba:8,smiles:"CN1C=C(C=N1)NC2=NC=CC(=N2)N3C[C@H]4CC[C@@H](C3)N4C(=O)[C@@H]5CC5(F)F"},
+  "rusfertide": {cid:155884410,f:"C114H181N27O28S2",mw:2442.0,logp:-1.5,hbd:29,hba:34,smiles:"CCCCCCCCCCCCCCCC(=O)N[C@@H](CCC(=O)NCCCC[C@H]1C(=O)N[C@H](C(=O)N[C@H](C(=O)N2CCC[C@H]2C(=O)N[C@H](C(=O)N[C@H](C(=O)N[C@H](C(=O)NCC(=O)N[C@@H](CSSC[C@@H](C(=O)N[C@H](C(=O)N1)[C@@H](C)CC)NC(=O)[C@@H]3CCCN3C(=O)[C@H](CC4=CC=CC=C4)NC(=O)[C@H](CC5=CNC=N5)NC(=O)[C@H]([C@@H](C)O)NC(=O)[C@H](CC(=O)O)NC(=O)CC(C)C)C(=O)N[C@@H](CCCCN)C(=O)N)CCCCN)CO)CCCNC(=N)N)CCC(=O)O)CC6=CC=CC=C6)C(=O)O"},
+  "camizestrant": {cid:134453496,f:"C24H28F4N6",mw:476.5,logp:4.2,hbd:2,hba:9,smiles:"C[C@@H]1CC2=C(C=CC3=C2C=NN3)[C@H](N1CC(F)(F)F)C4=NC=C(C=C4)NC5CN(C5)CCCF"},
+  "floretyrosine": {cid:9834479,f:"C11H14FNO3",mw:226.23,logp:-0.8,hbd:2,hba:5,smiles:"C1=CC(=CC=C1C[C@@H](C(=O)O)N)OCC[18F]"},
+  "lirafugratinib": {cid:155309155,f:"C28H24FN7O2",mw:509.5,logp:4.3,hbd:2,hba:8,smiles:"CC1=NC(=NC=C1)OC2=C(C=C(C=C2)C3=C(N(C4=NC=NC(=C34)N)C)C5=CC=C(C=C5)NC(=O)C(=C)C)F"},
+  "tavapadon": {cid:86764100,f:"C19H16F3N3O3",mw:391.3,logp:3.3,hbd:1,hba:7,smiles:"CC1=C(C=CC(=C1)OC2=C(C=CC=N2)C(F)(F)F)C3=C(C(=O)NC(=O)N3C)C"},
+  "zilurgisertib": {cid:138628908,f:"C30H38N4O3",mw:502.6,logp:3.4,hbd:3,hba:6,smiles:"C1COCCC1N2C[C@H]3C[C@]3(C2)C4=CC=C(C=C4)C5=CC(=C(N=C5)N)C(=O)NC67CCC(CC6)(CC7)O"},
+  "tiratricol": {cid:5803,f:"C14H9I3O4",mw:621.93,logp:4.5,hbd:2,hba:4,smiles:"C1=CC(=C(C=C1OC2=C(C=C(C=C2I)CC(=O)O)I)I)O"},
+  "pritelivir": {cid:491941,f:"C18H18N4O3S2",mw:402.5,logp:2.1,hbd:1,hba:7,smiles:"CC1=C(SC(=N1)N(C)C(=O)CC2=CC=C(C=C2)C3=CC=CC=N3)S(=O)(=O)N"},
   "orforglipron": {cid:137319706,f:"C48H48F2N10O5",mw:883.0,logp:6.8,hbd:1,hba:10,smiles:"C[C@H]1C[C@]1(C2=NOC(=O)N2)N3C4=C(C=C(C=C4)[C@H]5CCOC(C5)(C)C)C=C3C(=O)N6CCC7=NN(C(=C7[C@@H]6C)N8C=CN(C8=O)C9=C(C1=C(C=C9)N(N=C1)C)F)C1=CC(=C(C(=C1)C)F)C"},
   "relacorilant": {cid:73051463,f:"C27H22F4N6O3S",mw:586.6,logp:2.9,hbd:0,hba:11,smiles:"CN1C=C(C=N1)S(=O)(=O)N2CCC3=CC4=C(C[C@@]3(C2)C(=O)C5=NC=CC(=C5)C(F)(F)F)C=NN4C6=CC=C(C=C6)F"},
   "linerixibat": {cid:53492727,f:"C28H38N2O7S",mw:546.7,logp:-1.6,hbd:4,hba:9,smiles:"CCCC[C@@]1(CS(=O)(=O)C2=C(C=C(C(=C2)CNC(CC(=O)O)CC(=O)O)OC)[C@H](N1)C3=CC=CC=C3)CC"},
