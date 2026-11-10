@@ -49,6 +49,7 @@ const PC = {
   "tavapadon": {cid:86764100,f:"C19H16F3N3O3",mw:391.3,logp:3.3,hbd:1,hba:7,smiles:"CC1=C(C=CC(=C1)OC2=C(C=CC=N2)C(F)(F)F)C3=C(C(=O)NC(=O)N3C)C"},
   "zilurgisertib": {cid:138628908,f:"C30H38N4O3",mw:502.6,logp:3.4,hbd:3,hba:6,smiles:"C1COCCC1N2C[C@H]3C[C@]3(C2)C4=CC=C(C=C4)C5=CC(=C(N=C5)N)C(=O)NC67CCC(CC6)(CC7)O"},
   "tiratricol": {cid:5803,f:"C14H9I3O4",mw:621.93,logp:4.5,hbd:2,hba:4,smiles:"C1=CC(=C(C=C1OC2=C(C=C(C=C2I)CC(=O)O)I)I)O"},
+  "asundexian": {cid:135206011,f:"C26H21ClF4N6O4",mw:592.9,logp:3.0,hbd:2,hba:10,smiles:"CC[C@@H](C(=O)NC1=CC(=C(C=C1)C(=O)N)F)N2C=C(C(=CC2=O)C3=C(C=CC(=C3)Cl)N4C=C(N=N4)C(F)(F)F)OC"},
   "pritelivir": {cid:491941,f:"C18H18N4O3S2",mw:402.5,logp:2.1,hbd:1,hba:7,smiles:"CC1=C(SC(=N1)N(C)C(=O)CC2=CC=C(C=C2)C3=CC=CC=N3)S(=O)(=O)N"},
   "orforglipron": {cid:137319706,f:"C48H48F2N10O5",mw:883.0,logp:6.8,hbd:1,hba:10,smiles:"C[C@H]1C[C@]1(C2=NOC(=O)N2)N3C4=C(C=C(C=C4)[C@H]5CCOC(C5)(C)C)C=C3C(=O)N6CCC7=NN(C(=C7[C@@H]6C)N8C=CN(C8=O)C9=C(C1=C(C=C9)N(N=C1)C)F)C1=CC(=C(C(=C1)C)F)C"},
   "relacorilant": {cid:73051463,f:"C27H22F4N6O3S",mw:586.6,logp:2.9,hbd:0,hba:11,smiles:"CN1C=C(C=N1)S(=O)(=O)N2CCC3=CC4=C(C[C@@]3(C2)C(=O)C5=NC=CC(=C5)C(F)(F)F)C=NN4C6=CC=C(C=C6)F"},
@@ -136,7 +137,10 @@ const PC = {
 // ─────────────────────────────────────────────────────────────────────────────
 const RAW = {
   2026:[
+    // ── Novembro 2026 ──
+    {name:"Sunharbo",   ing:"asundexian",               date:"2026-11-09",sponsor:"Bayer",route:"PO",moa:"First-in-class oral, reversible factor XIa inhibitor; dampens intrinsic-pathway thrombin amplification while largely sparing hemostasis, aiming at stroke prevention with lower bleeding risk than FXa inhibitors",atc:"B01AX",desig:["FT","PR","FIC"],indication:"Reduction of stroke risk in adults after a recent mild-to-moderate non-cardioembolic ischemic stroke or high-risk TIA"},
     // ── Outubro 2026 ──
+    {name:"Hibsago",    ing:"bepirovirsen",             date:"2026-10-20",sponsor:"GSK (licensed from Ionis)",route:"SC",moa:"First-in-class antisense oligonucleotide targeting all HBV RNAs (pgRNA and viral mRNAs), lowering HBsAg and viral protein production; given up to 24 weeks on top of nucleos(t)ide therapy to pursue functional cure",atc:"J05AX",desig:["BT","PR","FIC"],indication:"Chronic hepatitis B in adults without cirrhosis, suppressed on nucleos(t)ide analogue therapy, with HBsAg <=3000 IU/mL"},
     {name:"Hovilpri",   ing:"pritelivir",               date:"2026-10-09",sponsor:"AiCuris",route:"PO",moa:"First-in-class helicase-primase inhibitor (thiazolylamide class); blocks HSV-1/HSV-2 DNA replication independently of viral thymidine kinase, retaining activity against acyclovir- and foscarnet-resistant strains",atc:"J05AX",desig:["FT","BT","PR","FIC"],indication:"Mucocutaneous herpes simplex virus infection in immunocompromised adults not responding to other therapies"},
     // ── Setembro 2026 ──
     {name:"Emcitate",   ing:"tiratricol",               date:"2026-09-28",sponsor:"Egetis Therapeutics",route:"PO",moa:"Thyroid hormone receptor agonist (T3 analogue, Triac); enters cells independently of the defective MCT8 transporter, lowering elevated serum T3 and the resulting peripheral thyrotoxicosis",atc:"H03AA",desig:["OD","FT","BT","PR"],indication:"Peripheral thyrotoxicosis in adults and pediatric patients with MCT8 deficiency (Allan-Herndon-Dudley syndrome)"},
@@ -373,7 +377,7 @@ const RAW = {
 // ─────────────────────────────────────────────────────────────────────────────
 function isBiologic(ing) {
   return /-(mab|cept|alfa|beta|gamma|deruxtecan|vedotin|wuug|szsi|hrii|hncq|tllv|kcqx|cfor|aahu|bcmm|tgvs|mrkz|irmb|lbkz|trbw|dlnk|nbln|ipdl|zbco|clzb|mtci|ulaa|eknm|gcpt|liga|dpyl|jome|actl|gmod|pvzy|vvze|vymj|vikg|grts|mstn|gobe)\b/i.test(ing) ||
-    /\b(narsoplimab|sibeprenlimab|depemokimab|icotrokinra|navepegritide|pegzilarginase|tividenofusp|concizumab|linvoseltamab|garadacimab|clesrovimab|telisotuzumab|nipocalimab|penpulimab|datopotamab|pembrolizumab|plozasiran|fitusiran|vutrisiran|nedosiran|olezarsen|tofersen|insulin icodec|bulevirtide|pivekimab|veligrotug|atacicept|bevacizumab|garetosmab|zilganersen)\b/i.test(ing);
+    /\b(narsoplimab|sibeprenlimab|depemokimab|icotrokinra|navepegritide|pegzilarginase|tividenofusp|concizumab|linvoseltamab|garadacimab|clesrovimab|telisotuzumab|nipocalimab|penpulimab|datopotamab|pembrolizumab|plozasiran|fitusiran|vutrisiran|nedosiran|olezarsen|tofersen|insulin icodec|bulevirtide|pivekimab|veligrotug|atacicept|bevacizumab|garetosmab|zilganersen|bepirovirsen)\b/i.test(ing);
 }
 
 function processData(raw) {
